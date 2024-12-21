@@ -1,6 +1,7 @@
 
 import {
     Avatar,
+    Button,
     DarkThemeToggle,
     Dropdown,
     DropdownDivider,
@@ -15,10 +16,15 @@ import {
 
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/log.jpg';
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 
 
 export function Header() {
+
+    const {user} = useContext(AuthContext)
+    console.log(user)
 
 
     return (
@@ -29,7 +35,7 @@ export function Header() {
             </NavbarBrand>
             <div className="flex md:order-2">
                 <DarkThemeToggle className="rounded-full mr-3" />
-                <Dropdown
+                {user? <Dropdown
                     arrowIcon={false}
                     inline
                     label={
@@ -45,7 +51,7 @@ export function Header() {
                     <DropdownItem>Earnings</DropdownItem>
                     <DropdownDivider />
                     <DropdownItem>Sign out</DropdownItem>
-                </Dropdown>
+                </Dropdown>: <Link to={'/login'}><Button>Login</Button></Link>}
                 <NavbarToggle />
             </div>
             <NavbarCollapse>
