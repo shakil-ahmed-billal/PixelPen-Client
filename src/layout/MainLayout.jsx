@@ -1,13 +1,24 @@
+
+import { FooterSection } from "../components/Footer";
 import { Header } from "../components/Header"
+import { Outlet } from 'react-router-dom';
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="dark:bg-slate-700 dark:text-slate-100">
       <header>
         <nav>
             <Header></Header>
         </nav>
       </header>
+      <main className="w-11/12 mx-auto min-h-[calc(100vh-305px)]">
+        <section>
+            <Outlet></Outlet>
+        </section>
+      </main>
+      <footer>
+        <FooterSection></FooterSection>
+      </footer>
     </div>
   )
 }
