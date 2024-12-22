@@ -1,36 +1,61 @@
 import axios from 'axios'
 import { format } from 'date-fns'
+import { Button, Label, Textarea } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 
 const BlogsDetails = () => {
     const { id } = useParams()
 
     const [details, setDetails] = useState({})
+    const [commentText, setComment] = useState('')
+    const [commentData, setCommentData] = useState([])
+    const { user } = useAuth()
 
 
-    const { title, imageURL, shortDescription, longDescription, category, postTime, userName, userEmail, userPhoto, comment } = details[0] || {}
+    const { title, imageURL, shortDescription, longDescription, category, postTime, userName, userEmail, userPhoto, comment, _id } = details[0] || {}
 
     useEffect(() => {
         const handleData = async () => {
             const { data } = await axios.get(`${import.meta.env.VITE_LINK}/blog/${id}`)
             setDetails(data)
             // console.log(data)
+
+            const dataBaseComment = await axios.get(`${import.meta.env.VITE_LINK}/comment/${id}`)
+            setCommentData(dataBaseComment.data)
         }
         handleData()
-    }, [id])
-    console.log(title , category)
-    console.log(details)
+    }, [id , commentData])
+
+    console.log(commentData)
+
+    const handleComment = async () => {
+
+        const postComment = {
+            blogId: _id,
+            name: user.displayName,
+            email: user.email,
+            commentText,
+            authorPhoto: user.photoURL,
+            commentLike: 0,
+            commentDate: new Date()
+        }
+        console.log(postComment)
+
+        const { data } = await axios.post(`${import.meta.env.VITE_LINK}/add-comment`, postComment)
+        console.log(data)
+    }
 
 
     return (
-        <div>
+        <div className='flex gap-3'>
             <div className="flex flex-col w-8/12 p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-50 dark:text-gray-800">
                 <div className="flex space-x-4">
                     <img alt="" referrerPolicy='no-referrer' src={userPhoto} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
                     <div className="flex flex-col space-y-1">
                         <a rel="noopener noreferrer" href="#" className="text-sm font-semibold">{userName}</a>
-                        <span className="text-xs dark:text-gray-600">{postTime&& format(new Date(postTime), 'P')}</span>
+                        <span className="text-xs dark:text-gray-600">{postTime && format(new Date(postTime), 'P')}</span>
                     </div>
                 </div>
                 <div>
@@ -68,6 +93,37 @@ const BlogsDetails = () => {
                             <span>283</span>
                         </button>
                     </div>
+                </div>
+            </div>
+            <div className="w-4/12">
+                <div className="">
+                    <div className="">
+                        <div className="mb-2 block">
+                            <Label htmlFor="comment" value="Your message" />
+                        </div>
+                        <div className="flex gap-3">
+                            <Textarea onChange={(e) => setComment(e.target.value)} id="comment" className='w-full' placeholder="Leave a comment..." required rows={4} />
+                            <div className="">
+                                <Button onClick={handleComment}>Comment</Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="">
+                    {commentData && commentData.map(item => <div key={item._id} className=''>
+                        <div className="flex gap-2">
+                            <div className="">
+                                <img className='w-16 rounded-full h-16' src={item.authorPhoto} alt="" />
+                            </div>
+                            <div className="">
+                                <p>User Name: {item.name}</p>
+                                <p>Comment: {item.commentText}</p>
+                                <p>{format(new Date(item.commentDate), 'P')}</p>
+
+                            </div>
+                        </div>
+                        <hr />
+                    </div>)}
                 </div>
             </div>
         </div>
