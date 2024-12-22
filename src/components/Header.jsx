@@ -60,10 +60,10 @@ export function Header() {
             </div>
             <NavbarCollapse>
                 <NavbarLink><NavLink to={'/'}>Home</NavLink></NavbarLink>
-                <NavbarLink><NavLink to={'/'}>Add Blog</NavLink></NavbarLink>
-                <NavbarLink><NavLink to={'/'}>All Blogs</NavLink></NavbarLink>
-                <NavbarLink><NavLink to={'/'}>WatchList</NavLink></NavbarLink>
-                <NavbarLink><NavLink to={'/'}>Feature Blog</NavLink></NavbarLink>
+                <NavbarLink><NavLink to={'/add-blog'}>Add Blog</NavLink></NavbarLink>
+                <NavbarLink><NavLink to={'/all-blogs'}>All Blogs</NavLink></NavbarLink>
+                <NavbarLink><NavLink to={'/watch-list'}>WatchList</NavLink></NavbarLink>
+                <NavbarLink><NavLink to={'/feature-blog'}>Feature Blog</NavLink></NavbarLink>
 
                 {/* <NavbarLink href="#"></NavbarLink> */}
             </NavbarCollapse>
