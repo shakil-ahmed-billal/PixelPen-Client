@@ -23,9 +23,13 @@ import { AuthContext } from "../provider/AuthProvider";
 
 export function Header() {
 
-    const {user} = useContext(AuthContext)
+    const {user , LogOutUser} = useContext(AuthContext)
     console.log(user)
 
+
+    const handleLogOut = () =>{
+        LogOutUser()
+    }
 
     return (
         <Navbar fluid rounded className="py-2 rounded-none">
@@ -34,23 +38,23 @@ export function Header() {
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">PixelPen</span>
             </NavbarBrand>
             <div className="flex md:order-2">
-                <DarkThemeToggle className="rounded-full mr-3" />
+                <DarkThemeToggle className="rounded-full w-10 h-10 flex justify-center my-auto mx-auto mr-3" />
                 {user? <Dropdown
                     arrowIcon={false}
                     inline
                     label={
-                        <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+                        <img referrerPolicy="no-referrer" className="w-12 h-12 rounded-full" src={user.photoURL}></img>
                     }
                 >
                     <DropdownHeader>
-                        <span className="block text-sm">Bonnie Green</span>
-                        <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+                        <span className="block text-sm">{user.displayName}</span>
+                        <span className="block truncate text-sm font-medium">{user.email}</span>
                     </DropdownHeader>
                     <Link to={'/dashboard'}><DropdownItem>Dashboard</DropdownItem></Link>
                     <DropdownItem>Settings</DropdownItem>
                     <DropdownItem>Earnings</DropdownItem>
                     <DropdownDivider />
-                    <DropdownItem>Sign out</DropdownItem>
+                    <DropdownItem onClick={handleLogOut}>Sign out</DropdownItem>
                 </Dropdown>: <Link to={'/login'}><Button>Login</Button></Link>}
                 <NavbarToggle />
             </div>
