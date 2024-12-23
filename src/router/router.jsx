@@ -6,6 +6,7 @@ import Login from "../authentication/Login";
 import AddBlog from "../pages/AddBlog";
 import BlogsDetails from "../pages/BlogsDetails";
 import AllBlogs from "../pages/AllBlogs";
+import UpdateBlog from "../pages/UpdateBlog";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: '/all-blogs',
                 element: <AllBlogs></AllBlogs>
+            },
+            {
+                path: '/update-blog/:id',
+                element: <UpdateBlog></UpdateBlog>
             }
         ]
     }

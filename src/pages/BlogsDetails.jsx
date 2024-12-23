@@ -2,41 +2,50 @@ import axios from 'axios'
 import { format } from 'date-fns'
 import { Button, Label, Textarea } from 'flowbite-react'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 
 const BlogsDetails = () => {
     const { id } = useParams()
 
     const [details, setDetails] = useState({})
-    const [commentText, setComment] = useState('')
     const [commentData, setCommentData] = useState([])
     const { user } = useAuth()
 
 
-    const { title, imageURL, shortDescription, longDescription, category, postTime, userName, userEmail, userPhoto, comment, _id } = details[0] || {}
+    const { title, imageURL, shortDescription, longDescription, category, postTime, userName, userEmail, userPhoto, _id } = details[0] || {}
+
 
     useEffect(() => {
         const handleData = async () => {
             const { data } = await axios.get(`${import.meta.env.VITE_LINK}/blog/${id}`)
             setDetails(data)
             // console.log(data)
-
-            const dataBaseComment = await axios.get(`${import.meta.env.VITE_LINK}/comment/${id}`)
-            setCommentData(dataBaseComment.data)
         }
         handleData()
-    }, [id , commentData])
+        handleCommentData()
+    }, [id])
+
+    const handleCommentData = async () => {
+        const {data} = await axios.get(`${import.meta.env.VITE_LINK}/comment/${id}`)
+        setCommentData(data)
+        console.log(data)
+    }
 
     console.log(commentData)
 
-    const handleComment = async () => {
+    const handleComment = async(e) => {
+        e.preventDefault()
+
+        const form = e.target;
+        const commentText = form.comment.value;
+        console.log(commentText)
 
         const postComment = {
             blogId: _id,
             name: user.displayName,
             email: user.email,
-            commentText,
+            commentText: e.target.comment.value ,
             authorPhoto: user.photoURL,
             commentLike: 0,
             commentDate: new Date()
@@ -44,18 +53,23 @@ const BlogsDetails = () => {
         console.log(postComment)
 
         const { data } = await axios.post(`${import.meta.env.VITE_LINK}/add-comment`, postComment)
-        console.log(data)
+        console.log(data) 
+        if(data){
+            handleCommentData()
+        }
     }
-
 
     return (
         <div className='flex gap-3'>
             <div className="flex flex-col w-8/12 p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-50 dark:text-gray-800">
                 <div className="flex space-x-4">
                     <img alt="" referrerPolicy='no-referrer' src={userPhoto} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
+                    <div className="flex justify-between w-full">
                     <div className="flex flex-col space-y-1">
                         <a rel="noopener noreferrer" href="#" className="text-sm font-semibold">{userName}</a>
                         <span className="text-xs dark:text-gray-600">{postTime && format(new Date(postTime), 'P')}</span>
+                    </div>
+                    <Link to={`/update-blog/${_id}`}><Button>Update</Button></Link>
                     </div>
                 </div>
                 <div>
@@ -97,17 +111,17 @@ const BlogsDetails = () => {
             </div>
             <div className="w-4/12">
                 <div className="">
-                    <div className="">
+                    <form onSubmit={handleComment}>
                         <div className="mb-2 block">
                             <Label htmlFor="comment" value="Your message" />
                         </div>
                         <div className="flex gap-3">
-                            <Textarea onChange={(e) => setComment(e.target.value)} id="comment" className='w-full' placeholder="Leave a comment..." required rows={4} />
+                            <Textarea name='comment'  id="comment" className='w-full' placeholder="Leave a comment..." required rows={4} />
                             <div className="">
-                                <Button onClick={handleComment}>Comment</Button>
+                                <button><Button>Comment</Button></button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div className="">
                     {commentData && commentData.map(item => <div key={item._id} className=''>
