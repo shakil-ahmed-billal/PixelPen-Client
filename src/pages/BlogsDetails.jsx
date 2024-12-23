@@ -36,6 +36,7 @@ const BlogsDetails = () => {
         const watchData = {
             authorName: user.displayName,
             authorEmail: user.email,
+            watchTime: new Date() ,
             userName,
             userPhoto,
             blogId:_id,
@@ -46,8 +47,8 @@ const BlogsDetails = () => {
 
         console.log(watchData)
 
-        // const {data} = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
-        // console.log(data)
+        const {data} = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
+        console.log(data)
     }
 
     console.log(commentData)
@@ -93,6 +94,7 @@ const BlogsDetails = () => {
                 </div>
                 <div>
                     <img src={imageURL} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
+                    <p>email: {userEmail}</p>
                     <h2 className="mb-1 text-xl font-semibold">{title}</h2>
                     <p className="text-sm dark:text-gray-600 my-3">{shortDescription}</p>
                     <p className="text-sm dark:text-gray-600">{longDescription}</p>

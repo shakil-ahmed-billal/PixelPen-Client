@@ -8,6 +8,7 @@ import BlogsDetails from "../pages/BlogsDetails";
 import AllBlogs from "../pages/AllBlogs";
 import UpdateBlog from "../pages/UpdateBlog";
 import FeatureBlog from "../pages/FeatureBlog";
+import WatchList from "../pages/WatchList";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: '/feature-blog',
                 element: <FeatureBlog></FeatureBlog>
+            },
+            {
+                path: '/watch-list' , 
+                element: <WatchList></WatchList>
             }
         ]
     }
