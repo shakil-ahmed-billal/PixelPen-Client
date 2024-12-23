@@ -44,9 +44,10 @@ const BlogsDetails = () => {
             category
         }
 
+        console.log(watchData)
 
-        const {data} = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
-        console.log(data)
+        // const {data} = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
+        // console.log(data)
     }
 
     console.log(commentData)
