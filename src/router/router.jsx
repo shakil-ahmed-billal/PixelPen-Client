@@ -7,6 +7,7 @@ import AddBlog from "../pages/AddBlog";
 import BlogsDetails from "../pages/BlogsDetails";
 import AllBlogs from "../pages/AllBlogs";
 import UpdateBlog from "../pages/UpdateBlog";
+import FeatureBlog from "../pages/FeatureBlog";
 
 const router = createBrowserRouter([
     {
@@ -36,10 +37,13 @@ const router = createBrowserRouter([
             {
                 path: '/update-blog/:id',
                 element: <UpdateBlog></UpdateBlog>
+            },
+            {
+                path: '/feature-blog',
+                element: <FeatureBlog></FeatureBlog>
             }
         ]
     }
 ])
-
 export default router
 

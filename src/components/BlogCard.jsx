@@ -1,4 +1,6 @@
 import { format } from "date-fns";
+import { Button } from "flowbite-react";
+import { Send } from "lucide-react";
 import { Link } from "react-router-dom";
 const BlogCard = ({blog}) => {
     const {title, imageURL, shortDescription, longDescription, category  , postTime , userName , userEmail ,userPhoto , comment , _id} = blog || {}
@@ -21,6 +23,8 @@ const BlogCard = ({blog}) => {
                         </svg>
                     </button>
                 </div>
+                <p>{title}</p>
+                <p className="mt-3 text-gray-600">{shortDescription.slice(0 , 80)}... <Link to={`blog/${_id}`}>see more</Link></p>
                <Link to={`/blog/${_id}`}> <img src={imageURL} alt="" className="object-cover object-center w-full h-72 dark:bg-gray-500" /></Link>
                 <div className="p-3">
                     <div className="flex items-center justify-between">
@@ -64,7 +68,14 @@ const BlogCard = ({blog}) => {
                         <p className="text-sm">
                             <span className="text-base font-semibold">leroy_jenkins72</span>Nemo ea quasi debitis impedit!
                         </p>
-                        <input type="text" placeholder="Add a comment..." className="w-full py-0.5 dark:bg- border-none rounded text-sm pl-0 dark:text-gray-800" spellCheck="false" data-ms-editor="true" />
+                        <div className="flex justify-between w-full">
+                            <Link to={`blog/${_id}`}><Button>Details</Button></Link>
+                            <Button>WatchList</Button>
+
+                        </div>
+                        <div className="w-full flex gap-3">
+                        <input type="text" placeholder="Add a comment..." className=" w-10/12 py-0.5 dark:bg- border-none rounded text-sm pl-0 dark:text-gray-800" spellCheck="false" data-ms-editor="true" /><button className="flex bg-sky-300 w-10 h-10 rounded-full items-center justify-center"><Send></Send></button>
+                        </div>
                     </div>
                 </div>
             </div>

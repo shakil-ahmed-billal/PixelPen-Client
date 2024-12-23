@@ -32,6 +32,23 @@ const BlogsDetails = () => {
         console.log(data)
     }
 
+    const handleWatchList = async () =>{
+        const watchData = {
+            authorName: user.displayName,
+            authorEmail: user.email,
+            userName,
+            userPhoto,
+            blogId:_id,
+            title,
+            imageURL,
+            category
+        }
+
+
+        const {data} = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
+        console.log(data)
+    }
+
     console.log(commentData)
 
     const handleComment = async(e) => {
@@ -69,6 +86,7 @@ const BlogsDetails = () => {
                         <a rel="noopener noreferrer" href="#" className="text-sm font-semibold">{userName}</a>
                         <span className="text-xs dark:text-gray-600">{postTime && format(new Date(postTime), 'P')}</span>
                     </div>
+                    <Button onClick={handleWatchList}>WatchList</Button>
                     <Link to={`/update-blog/${_id}`}><Button>Update</Button></Link>
                     </div>
                 </div>
