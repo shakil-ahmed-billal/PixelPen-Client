@@ -2,11 +2,38 @@ import { format } from "date-fns";
 import { Button } from "flowbite-react";
 import { Send } from "lucide-react";
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 
 
 const BlogCard = ({blog}) => {
+
+
+    const {user} = useAuth()
+
     const {title, imageURL, shortDescription, longDescription, category  , postTime , userName , userEmail ,userPhoto , comment , _id} = blog || {}
+
+
+    const handleWatchList = async () =>{
+        const watchData = {
+            authorName: user.displayName,
+            authorEmail: user.email,
+            watchTime: new Date() ,
+            userName,
+            userPhoto,
+            blogId:_id,
+            title,
+            imageURL,
+            category
+        }
+
+        console.log(watchData)
+
+        const {data} = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
+        console.log(data)
+    }
+
     return (
         <div>
             <div className="rounded-md shadow-md sm:w-96 dark:bg-gray-50 dark:text-gray-800">
@@ -73,7 +100,7 @@ const BlogCard = ({blog}) => {
                         </p>
                         <div className="flex justify-between w-full">
                             <Link to={`blog/${_id}`}><Button>Details</Button></Link>
-                            <Button>WatchList</Button>
+                            <Button onClick={handleWatchList}>WatchList</Button>
 
                         </div>
                         <div className="w-full flex gap-3">
