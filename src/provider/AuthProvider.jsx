@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app } from "../firebase/firebase.config";
+import axios from "axios";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext()
@@ -37,8 +38,12 @@ const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, async(currentUser) => {
       setUser(currentUser)
+      if(currentUser){
+        const {data} = await axios.get(`${import.meta.env.VITE_LINK}/jwt` , {withCredentials: true})
+        console.log(data)
+      }
       setLoading(false)
     })
     return () => {

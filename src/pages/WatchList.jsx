@@ -19,7 +19,7 @@ const WatchList = () => {
     },[user])
 
     const handleData = async ()=>{
-        const {data} = await axios.get(`${import.meta.env.VITE_LINK}/watch-list/${user.email}`)
+        const {data} = await axios.get(`${import.meta.env.VITE_LINK}/watch-list/${user.email}` , {withCredentials: true})
         console.log(data)
         setData(data)
     }

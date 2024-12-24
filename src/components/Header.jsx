@@ -32,10 +32,11 @@ export function Header() {
     }
 
     return (
-        <Navbar fluid rounded className="py-2 rounded-none">
+        <div className="">
+            <Navbar fluid rounded className="py-2 rounded-none">
             <NavbarBrand >
                 <Link to={'/'}><img src={logo} className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" /></Link>
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">PixelPen</span>
+                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">PixelPen <span className=" font-bold text-rose-500">.</span></span>
             </NavbarBrand>
             <div className="flex md:order-2">
                 <DarkThemeToggle className="rounded-full w-10 h-10 flex justify-center my-auto mx-auto mr-3" />
@@ -68,5 +69,6 @@ export function Header() {
                 {/* <NavbarLink href="#"></NavbarLink> */}
             </NavbarCollapse>
         </Navbar>
+        </div>
     );
 }

@@ -5,13 +5,13 @@ import { Outlet } from 'react-router-dom';
 
 const MainLayout = () => {
   return (
-    <div className="dark:bg-slate-700 dark:text-slate-100">
+    <div className="dark:bg-[#142030] dark:text-slate-100">
       <header>
         <nav>
             <Header></Header>
         </nav>
       </header>
-      <main className="w-11/12 mx-auto min-h-[calc(100vh-305px)]">
+      <main className="w-10/12 mx-auto min-h-[calc(100vh-305px)]">
         <section>
             <Outlet></Outlet>
         </section>

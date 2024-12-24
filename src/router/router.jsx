@@ -33,7 +33,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/all-blogs',
-                element: <AllBlogs></AllBlogs>
+                element: <AllBlogs></AllBlogs>,
+                loader: ()=> fetch(`${import.meta.env.VITE_LINK}/blogsCount`)
             },
             {
                 path: '/update-blog/:id',

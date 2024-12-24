@@ -8,7 +8,11 @@ export default {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage:{
+        'hero-bg': "url('./src/assets/blog.jpg')",
+      }
+    },
   },
   plugins: [
     flowbite.plugin(),

@@ -1,6 +1,6 @@
 import { format } from "date-fns";
-import { Button } from "flowbite-react";
-import { Send } from "lucide-react";
+import { Button, TextInput } from "flowbite-react";
+import { ClockArrowUp, ListCheckIcon, MessageCircle, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
@@ -36,26 +36,36 @@ const BlogCard = ({blog}) => {
 
     return (
         <div>
-            <div className="rounded-md shadow-md sm:w-96 dark:bg-gray-50 dark:text-gray-800">
-                <div className="flex items-center justify-between p-3">
-                    <div className="flex items-center space-x-2">
-                        <img referrerPolicy="no-referrer" src={userPhoto} alt="" className="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-300" />
-                        <div className="-space-y-1">
-                            <h2 className="text-sm font-semibold leading-none">{userName}</h2>
-                            <span className="inline-block text-xs leading-none dark:text-gray-600">{format(new Date(postTime), 'P')}</span>
-                        </div>
-                    </div>
-                    <button title="Open options" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current">
-                            <path d="M256,144a64,64,0,1,0-64-64A64.072,64.072,0,0,0,256,144Zm0-96a32,32,0,1,1-32,32A32.036,32.036,0,0,1,256,48Z"></path>
-                            <path d="M256,368a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,368Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,464Z"></path>
-                            <path d="M256,192a64,64,0,1,0,64,64A64.072,64.072,0,0,0,256,192Zm0,96a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,288Z"></path>
-                        </svg>
-                    </button>
+            {/* <div className="border-[#818E9F] border p-5 rounded-lg">
+                <div className="">
+                    <img className="rounded-lg" src={imageURL} alt="" />
                 </div>
-                <p>{title}</p>
-                <p className="mt-3 text-gray-600">{shortDescription.slice(0 , 80)}... <Link to={`blog/${_id}`}>see more</Link></p>
-               <Link to={`/blog/${_id}`}> <img src={imageURL} alt="" className="object-cover object-center w-full h-72 dark:bg-gray-500" /></Link>
+                <div className="flex gap-3 items-center">
+                    <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
+                    <p>{userName}</p><span className='text-[#FE4F70]'>.</span><p>{category}</p>
+                    <span className='text-[#FE4F70]'>.</span><p>Date: 12/12/12</p> <span className='text-[#FE4F70]'>.</span>
+                    <p className='flex items-center gap-1'><MessageCircle />{comment}</p>
+                </div>
+                <p className="text-3xl font-semibold">{title}</p>
+                <p>{shortDescription}....see more</p>
+            </div> */}
+            <div className="rounded-md shadow-md border border-[#818E9F] ">
+            <div className="flex gap-3 items-center p-3">
+                    <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
+                    <p>{userName}</p><span className='text-[#FE4F70]'>.</span><p>{category}</p>
+                    <span className='text-[#FE4F70]'>.</span><p>Date: 12/12/12</p> <span className='text-[#FE4F70]'>.</span>
+                    <p className='flex items-center gap-1'><MessageCircle />{comment}</p>
+                </div>
+                <p className="p-3 text-2xl font-semibold">{title}</p>
+                <p className="text-[#818E9F] p-3">{shortDescription.slice(0 , 80)}... <Link to={`blog/${_id}`}>see more</Link></p>
+               <div className="">
+               <Link to={`/blog/${_id}`}> 
+               <div className="relative">
+               <img src={imageURL} alt="" className="object-cover object-center w-full h-72 dark:bg-gray-500" />
+               <div className="absolute right-5 bottom-5 z-10"><button className="bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2"><ListCheckIcon /></button></div>
+               </div>
+               </Link>
+               </div>
                 <div className="p-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
@@ -69,16 +79,9 @@ const BlogCard = ({blog}) => {
                                     <path d="M496,496H480a273.39,273.39,0,0,1-179.025-66.782l-16.827-14.584C274.814,415.542,265.376,416,256,416c-63.527,0-123.385-20.431-168.548-57.529C41.375,320.623,16,270.025,16,216S41.375,111.377,87.452,73.529C132.615,36.431,192.473,16,256,16S379.385,36.431,424.548,73.529C470.625,111.377,496,161.975,496,216a171.161,171.161,0,0,1-21.077,82.151,201.505,201.505,0,0,1-47.065,57.537,285.22,285.22,0,0,0,63.455,97L496,457.373ZM294.456,381.222l27.477,23.814a241.379,241.379,0,0,0,135,57.86,317.5,317.5,0,0,1-62.617-105.583v0l-4.395-12.463,9.209-7.068C440.963,305.678,464,262.429,464,216c0-92.636-93.309-168-208-168S48,123.364,48,216s93.309,168,208,168a259.114,259.114,0,0,0,31.4-1.913Z"></path>
                                 </svg>
                             </button>
-                            <button type="button" title="Share post" className="flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current">
-                                    <path d="M474.444,19.857a20.336,20.336,0,0,0-21.592-2.781L33.737,213.8v38.066l176.037,70.414L322.69,496h38.074l120.3-455.4A20.342,20.342,0,0,0,474.444,19.857ZM337.257,459.693,240.2,310.37,389.553,146.788l-23.631-21.576L215.4,290.069,70.257,232.012,443.7,56.72Z"></path>
-                                </svg>
-                            </button>
                         </div>
-                        <button type="button" title="Bookmark post" className="flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current">
-                                <path d="M424,496H388.75L256.008,381.19,123.467,496H88V16H424ZM120,48V456.667l135.992-117.8L392,456.5V48Z"></path>
-                            </svg>
+                        <button onClick={handleWatchList} type="button" title="Bookmark post" className="flex items-center justify-center bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 mr-1">
+                         <ClockArrowUp />
                         </button>
                     </div>
                     <div className="flex flex-wrap items-center pt-3 pb-1">
@@ -98,13 +101,9 @@ const BlogCard = ({blog}) => {
                         <p className="text-sm">
                             <span className="text-base font-semibold">leroy_jenkins72</span>Nemo ea quasi debitis impedit!
                         </p>
-                        <div className="flex justify-between w-full">
-                            <Link to={`blog/${_id}`}><Button>Details</Button></Link>
-                            <Button onClick={handleWatchList}>WatchList</Button>
-
-                        </div>
                         <div className="w-full flex gap-3">
-                        <input type="text" placeholder="Add a comment..." className=" w-10/12 py-0.5 dark:bg- border-none rounded text-sm pl-0 dark:text-gray-800" spellCheck="false" data-ms-editor="true" /><button className="flex bg-sky-300 w-10 h-10 rounded-full items-center justify-center"><Send></Send></button>
+                        <TextInput type="text" placeholder="Add a comment..." className="w-full py-0.5 dark:bg- border-none rounded text-sm pl-0 dark:text-gray-800" spellCheck="false" data-ms-editor="true" />
+                        <button className="flex bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 items-center justify-center"><Send></Send></button>
                         </div>
                     </div>
                 </div>
@@ -114,3 +113,5 @@ const BlogCard = ({blog}) => {
 }
 
 export default BlogCard
+
+

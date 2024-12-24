@@ -74,11 +74,11 @@ const AddBlog = () => {
                                     id='category'
                                     className='border p-2 rounded-md'
                                 >
-                                    <option value='Web Development'>Travel</option>
-                                    <option value='Graphics Design'>Technology</option>
-                                    <option value='Digital Marketing'>Lifestyle</option>
-                                    <option value='Digital Marketing'>Food and Cooking</option>
-                                    <option value='Digital Marketing'>Finance and Business</option>
+                                    <option value='Travel'>Travel</option>
+                                    <option value='Technology'>Technology</option>
+                                    <option value='Lifestyle'>Lifestyle</option>
+                                    <option value='Food and Cooking'>Food and Cooking</option>
+                                    <option value='Finance and Business'>Finance and Business</option>
                                 </select>
                             </div>
                         </div>
