@@ -1,36 +1,87 @@
-import { Link } from "react-router-dom"
+import { useContext, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import logo from '../assets/log.jpg'
-import { useContext } from "react"
 import { AuthContext } from "../provider/AuthProvider"
+import { Eye, EyeOff } from "lucide-react"
+import toast from "react-hot-toast"
 
 const Register = () => {
 
-    const {googleLogin , createUser} = useContext(AuthContext)
+    const { googleLogin, createUser , userUpdate } = useContext(AuthContext)
+    const navigate = useNavigate()
 
-    const handleGoogle = () =>{
-        googleLogin()
-        .then(res => {
-            console.log(res.user)
-        })
-    }
+    // const handleGoogle = () => {
+    //     googleLogin()
+    //         .then(res => {
+    //             console.log(res.user)
+    //         })
+    // }
 
-    const handleForm = (e)=>{
+    const handleForm = (e) => {
         e.preventDefault()
         const form = e.target;
-        const photoURL = form.photoURL.value ;
+        const photoURL = form.photoURL.value;
         const name = form.name.value;
         const email = form.email.value;
-        const password = form.password.value;
+        const password = StrongPassword;
 
         // user account create option
-        createUser(email , password)
-        .then(res =>{
-            console.log(res.user)
-        }).catch(error=>{
-            console.log(error)
-        })
+        if(strengthProgress == 100){
+            console.log(password)
+            createUser(email, password)
+            .then(res => {
+                userUpdate({displayName: name , photoURL})
+                .then(res=>{
+                    toast.success(`Register Successful ${res.user.displayName}`)
+                    navigate('/')
+                })
+            }).catch(error => {
+                toast.error(error.message)
+            })
+        }else{
+            toast.error('Please use Strong Password')
+        }
     }
 
+    // strong password system make
+    const [isEyeOpen, setIsEyeOpen] = useState(false);
+    const [StrongPassword, setStrongPassword] = useState("");
+    const [signal, setSignal] = useState({
+        lowercase: false,
+        uppercase: false,
+        number: false,
+        symbol: false,
+        length: false,
+        strong: false
+    });
+
+    const countTrueItems = (obj) => {
+        const totalItems = Object.keys(obj).length;
+        const trueItems = Object.values(obj).filter((item) => item).length;
+        return (trueItems / totalItems) * 100;
+    };
+
+    const strengthProgress = Math.floor(countTrueItems(signal));
+
+    const handleStrongPasswordChecker = (e) => {
+        const password = e.target.value;
+        setStrongPassword(password);
+
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        setSignal({
+            lowercase: hasLowerCase,
+            uppercase: hasUpperCase,
+            number: hasNumber,
+            symbol: hasSymbol,
+            length: password.length >= 6,
+            strong: hasUpperCase && hasLowerCase && hasNumber && hasSymbol && password.length >= 8
+        });
+    }
+    console.log(StrongPassword)
     return (
         <div className='flex justify-center items-center min-h-[calc(100vh-306px)] '>
             <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>
@@ -61,6 +112,7 @@ const Register = () => {
                                 id='LoggingEmailAddress'
                                 autoComplete='email'
                                 name='photoURL'
+                                required
                                 className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
                                 type='url'
                             />
@@ -76,6 +128,7 @@ const Register = () => {
                                 id='LoggingEmailAddress'
                                 autoComplete='email'
                                 name='name'
+                                required
                                 className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
                                 type='text'
                             />
@@ -91,12 +144,13 @@ const Register = () => {
                                 id='LoggingEmailAddress'
                                 autoComplete='email'
                                 name='email'
+                                required
                                 className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
                                 type='email'
                             />
                         </div>
 
-                        <div className='mt-4'>
+                        <div className='mt-4 relative'>
                             <div className='flex justify-between'>
                                 <label
                                     className='block mb-2 text-sm font-medium text-gray-600 '
@@ -107,13 +161,40 @@ const Register = () => {
                             </div>
 
                             <input
-                                id='loggingPassword'
+                                type={isEyeOpen ? "text" : "password"}
+                                name="password"
+                                id="password"
+                                required
+                                onChange={handleStrongPasswordChecker}
                                 autoComplete='current-password'
-                                name='password'
                                 className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
-                                type='password'
                             />
+                            <div className="w-full mt-2 flex items-center gap-[5px]">
+                            <div
+                                className={`${strengthProgress > 0 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
+                            <div
+                                className={`${strengthProgress > 16 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
+                            <div
+                                className={`${strengthProgress > 33 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
+                            <div
+                                className={`${strengthProgress > 50 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
+                            <div
+                                className={`${strengthProgress == 100 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
+
                         </div>
+                        {isEyeOpen ? (
+                                      <Eye 
+                                          className=" absolute top-9 right-4 text-[1.5rem] text-[#777777] cursor-pointer"
+                                          onClick={() => setIsEyeOpen(false)}
+                                      />
+                                  ) : (
+                                      <EyeOff 
+                                          className=" absolute top-9 right-4 text-[1.5rem] text-[#777777] cursor-pointer"
+                                          onClick={() => setIsEyeOpen(true)}
+                                      />
+                                  )}
+                        </div>
+                        
                         <div className='mt-6'>
                             <button
                                 type='submit'

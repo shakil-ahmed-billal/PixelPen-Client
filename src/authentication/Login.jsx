@@ -1,17 +1,45 @@
-import { Link } from "react-router-dom"
-import logo from '../assets/log.jpg'
 import { useContext } from "react"
+import toast from "react-hot-toast"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import logo from '../assets/log.jpg'
 import { AuthContext } from "../provider/AuthProvider"
 
 const Login = () => {
 
-    const {googleLogin} = useContext(AuthContext)
+    const { googleLogin, userLogin } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
 
-    const handleGoogle = () =>{
+    const handleGoogle = () => {
         googleLogin()
-        .then(res => {
-            console.log(res.user)
-        })
+            .then(res => {
+                console.log(res.user)
+                if (res.user) {
+                    toast.success(`Successfully Login ${res.user.displayName}`)
+                    navigate(location?.state ? location.state : '/')
+                }
+            }).catch(err => {
+                toast.error(err.message)
+            })
+    }
+
+    const handleLogin = (e) => {
+        e.preventDefault()
+
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log({ email, password })
+
+        // user log in system
+        userLogin(email, password)
+            .then(res => {
+                console.log(res.user)
+                toast.success(`Login Successful ${res.user.displayName}`)
+                navigate(location?.state ? location.state : '/')
+            }).catch(error => {
+                toast.error(error.message)
+            })
     }
 
     return (
@@ -72,7 +100,7 @@ const Login = () => {
 
                         <span className='w-1/5 border-b dark:border-gray-400 lg:w-1/4'></span>
                     </div>
-                    <form >
+                    <form onSubmit={handleLogin}>
                         <div className='mt-4'>
                             <label
                                 className='block mb-2 text-sm font-medium text-gray-600 '

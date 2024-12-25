@@ -11,6 +11,7 @@ import FeatureBlog from "../pages/FeatureBlog";
 import WatchList from "../pages/WatchList";
 import PrivateRoute from "../private/PrivateRoute";
 import Register from "../pages/Register";
+import Page404 from "../error/Page404";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <WatchList></WatchList>
                 </PrivateRoute>
+            },
+            {
+                path: '*',
+                element: <Page404></Page404>
             }
         ]
     }

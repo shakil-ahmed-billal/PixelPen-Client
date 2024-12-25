@@ -4,8 +4,13 @@ import { Label, Textarea } from 'flowbite-react'
 import { Edit, Eye, MessageCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
+import { PhotoProvider, PhotoView } from 'react-photo-view'
+import 'react-photo-view/dist/react-photo-view.css'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 const BlogsDetails = () => {
     const { id } = useParams()
@@ -33,11 +38,11 @@ const BlogsDetails = () => {
         const { data } = await axios.get(`${import.meta.env.VITE_LINK}/comment/${id}`)
         setCommentData(data)
         console.log(data)
-        
+
     }
 
     const handleWatchList = async () => {
-        if(!user){
+        if (!user) {
             return navigate(`/login`)
         }
         const watchData = {
@@ -71,7 +76,7 @@ const BlogsDetails = () => {
         console.log(commentText)
 
 
-        if(!user){
+        if (!user) {
             toast.error('Please Fast LogIn Than Comment')
             return navigate('/login')
         }
@@ -96,10 +101,10 @@ const BlogsDetails = () => {
                 handleCommentData()
                 toast.success(`Comment: ${commentText}`)
             }
-        }else{
+        } else {
             toast.error('Own cannot comment')
         }
-        
+
     }
 
     return (
@@ -107,10 +112,14 @@ const BlogsDetails = () => {
             <div className="col-span-4">
                 <div className="my-5">
                     <p className='text-[#8F9BAD] py-3'>PixelPen / {category} / {title?.slice(0, 50)}</p>
-                    <p className='text-4xl font-bold text-white'>{title}</p>
+                    <p className='text-4xl font-bold text-white'>{title || <Skeleton></Skeleton>}</p>
                     <div className="flex justify-between items-center">
                         <div className="flex gap-3 my-3 items-center py-3">
-                            <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
+                            <PhotoProvider>
+                                <PhotoView src={userPhoto}>
+                                    <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
+                                </PhotoView>
+                            </PhotoProvider>
                             <p>{userName}</p><span className='text-[#FE4F70]'>.</span><p>{category}</p>
                             <span className='text-[#FE4F70]'>.</span><p>Date: 12/12/12</p> <span className='text-[#FE4F70]'>.</span>
                             <p className='flex items-center gap-2'><MessageCircle />{comment}</p>
@@ -121,9 +130,13 @@ const BlogsDetails = () => {
                         </div>
                     </div>
                     <div className="">
-                        <img className='w-full h-[450px] object-cover' src={imageURL} alt="" />
-                        <p className='py-10'>{shortDescription}</p>
-                        <p>{longDescription}</p>
+                        <PhotoProvider>
+                            <PhotoView src={imageURL}>
+                                <img className='w-full h-[450px] object-cover' src={imageURL} alt="" />
+                            </PhotoView>
+                        </PhotoProvider>
+                        <p className='py-10'>{shortDescription || <Skeleton count={2}></Skeleton>}</p>
+                        <p>{longDescription || <Skeleton count={5}></Skeleton>}</p>
                     </div>
                 </div>
             </div>

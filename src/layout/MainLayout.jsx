@@ -16,7 +16,7 @@ const MainLayout = () => {
             <Outlet></Outlet>
         </section>
       </main>
-      <footer>
+      <footer className="mt-10">
         <FooterSection></FooterSection>
       </footer>
     </div>

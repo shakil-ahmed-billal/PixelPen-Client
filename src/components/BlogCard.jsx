@@ -4,6 +4,7 @@ import { ClockArrowUp, Eye, ListCheckIcon, MessageCircle, Send } from "lucide-re
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 
 
@@ -32,6 +33,9 @@ const BlogCard = ({blog}) => {
 
         const {data} = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
         console.log(data)
+        if(data){
+            toast.success(`This Blog Add WishList Successfully`)
+        }
     }
 
     return (

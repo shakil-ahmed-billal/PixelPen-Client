@@ -65,13 +65,14 @@ const AllBlogs = () => {
                     {blogs && blogs?.map(blog => <BlogCard key={blog._id} blog={blog}></BlogCard>)}
                 </div>
             </div>}
-            <div className="w-full flex justify-center">
-                <p>page:{currentPage}</p>
-                {pages.map(item => <button onClick={()=>setCurrentPage(item)} className={currentPage == item? 'btn-custom border-2' : 'btn-custom'} key={item}>{item}</button>)}
+            <div className="w-full gap-2 flex justify-center">
+                {pages.map(item => <button onClick={()=>setCurrentPage(item)} className={currentPage == item? ' bg-gradient-to-r from-pink-500 to-orange-500 text-white border-white border-2 font-bold w-10 h-10 rounded-full ' : 'bg-gradient-to-r from-pink-500 to-orange-500 text-white font-bold w-10 h-10 rounded-full'} key={item}>{item}</button>)}
                 <Select onChange={(e) => handlePage(parseInt(e.target.value))} id="countries" required>
-                        <option selected disabled value='Web Development'>page</option>
-                        <option value='1'>1</option>
+                        <option selected disabled value='Web Development'>{itemPerPage}</option>
                         <option value='2'>2</option>
+                        <option value='4'>4</option>
+                        <option value='6'>6</option>
+                        <option value='8'>8</option>
                         
                     </Select>
             </div>

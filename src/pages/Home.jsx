@@ -8,6 +8,7 @@ import imageBrand from '../assets/celebration.jpg'
 import NewsLetter from "../components/NewsLeter"
 import RecentBlog from "../components/RecentBlog"
 import PopularBlog from "../components/PopularBlog"
+import Loading from "../components/Loading"
 
 
 const Home = () => {
@@ -60,7 +61,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <p className="text-3xl font-semibold">Latest Posts</p>
+      <p className="text-3xl font-semibold">Recent Blogs Post</p>
       <p className="border-color mt-2"></p>
       <div className="grid grid-cols-8 gap-10 my-10">
         {/* category section */}

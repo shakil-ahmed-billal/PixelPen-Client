@@ -1,11 +1,12 @@
 
 import axios from "axios";
+import { format } from "date-fns";
 import { Button, Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { format } from "date-fns";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 
@@ -13,6 +14,7 @@ const WatchList = () => {
 
   const { user } = useAuth()
   const [data, setData] = useState([])
+  const axiosSecure = useAxiosSecure()
 
   useEffect(() => {
 
@@ -21,7 +23,7 @@ const WatchList = () => {
   }, [user])
 
   const handleData = async () => {
-    const { data } = await axios.get(`${import.meta.env.VITE_LINK}/watch-list/${user.email}`, { withCredentials: true })
+    const { data } = await axiosSecure.get(`/watch-list/${user.email}`)
     console.log(data)
     setData(data)
   }
@@ -35,28 +37,28 @@ const WatchList = () => {
           <div className="flex items-start">
             <div className="ml-3 flex-1">
               <p className="text-sm font-medium text-gray-900">
-                Are you sure this WatchList for Delete
+                Are you sure you want to delete the information?
               </p>
             </div>
           </div>
         </div>
         <div className="flex items-center border-l border-gray-200">
           <div className="">
-          <button
-            onClick={async() => {
-              const { data } = await axios.delete(`${import.meta.env.VITE_LINK}/watch-list/${id}`)
-              console.log(data)
+            <button
+              onClick={async () => {
+                const { data } = await axios.delete(`${import.meta.env.VITE_LINK}/watch-list/${id}`)
+                console.log(data)
 
-              console.log(id)
-              if (data.deletedCount) {
-                handleData()
-                toast.dismiss(t.id)
-                toast.success('This wishList Data Delete')
-              }
-            }}
-            className="btn-custom" >
-            Delete
-          </button>
+                console.log(id)
+                if (data.deletedCount) {
+                  handleData()
+                  toast.dismiss(t.id)
+                  toast.success('This wishList Data Delete')
+                }
+              }}
+              className="btn-custom" >
+              Delete
+            </button>
           </div>
           <button
             onClick={() => toast.dismiss(t.id)}

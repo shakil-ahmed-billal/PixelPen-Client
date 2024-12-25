@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import useAuth from '../hooks/useAuth';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 const RecentBlog = ({ blog }) => {
     
@@ -45,16 +48,16 @@ const RecentBlog = ({ blog }) => {
                 </div>
                 <div className="">
                 <div className="flex gap-3 items-center">
-                    <img referrerPolicy='no-referrer' src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
+                    <img referrerPolicy='no-referrer' src={userPhoto || <Skeleton></Skeleton>} className='w-10 h-10 object-cover rounded-full' alt="" />
                     <p>{userName}</p><span className='text-[#FE4F70]'>.</span><p>{category}</p>
                     <span className='text-[#FE4F70]'>.</span><p>Date: 12/12/12</p> <span className='text-[#FE4F70]'>.</span>
                     <p className='flex items-center gap-1'><MessageCircle />{comment}</p>
                 </div>
-                <p className='text-2xl font-semibold my-3'>{title.slice(0,60)}.....<Link to={`/blog/${_id}`}><button>See more</button></Link></p>
-                <p className='text-[#8F9BAD]'>{shortDescription.slice(0,110)}....<Link to={`/blog/${_id}`}><button>see more</button></Link></p>
+                <p className='text-2xl font-semibold my-3'>{title.slice(0,60)|| <Skeleton></Skeleton>}.....<Link to={`/blog/${_id}`}><button>See more</button></Link></p>
+                <p className='text-[#8F9BAD]'>{shortDescription.slice(0,110)|| <Skeleton count={2}></Skeleton>}....<Link to={`/blog/${_id}`}><button>see more</button></Link></p>
                 <div className="flex justify-between text-[#818E9F] mt-1">
                     <button onClick={handleWatchList}><Eye /></button>
-                    <button><ListCollapse /></button>
+                    <Link to={`/blog/${_id}`}><ListCollapse /></Link>
                 </div>
                 </div>
             </div>
