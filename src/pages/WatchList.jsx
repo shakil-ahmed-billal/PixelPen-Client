@@ -50,8 +50,9 @@ const WatchList = () => {
               console.log(id)
               if (data.deletedCount) {
                 handleData()
+                toast.dismiss(t.id)
+                toast.success('This wishList Data Delete')
               }
-              toast.dismiss(t.id)
             }}
             className="btn-custom" >
             Delete

@@ -33,6 +33,7 @@ const BlogsDetails = () => {
         const { data } = await axios.get(`${import.meta.env.VITE_LINK}/comment/${id}`)
         setCommentData(data)
         console.log(data)
+        
     }
 
     const handleWatchList = async () => {
@@ -56,7 +57,7 @@ const BlogsDetails = () => {
         const { data } = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
         console.log(data)
         if (data) {
-            toast.success('this blog add watchList')
+            toast.success('This blog add WishList ✔️')
         }
     }
 

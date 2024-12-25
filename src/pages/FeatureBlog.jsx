@@ -24,6 +24,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import { Select, Table, TextInput } from "flowbite-react";
 
 const columnHelper = createColumnHelper();
 
@@ -32,7 +33,7 @@ const columns = [
     cell: (info) => <img className="w-24 h-24 object-cover" src={info.getValue()} alt="" />,
     header: () => (
       <span className="flex items-center">
-        <Image className="mr-2" size={16} /> ID
+        <Image className="mr-2" size={16} /> Image
       </span>
     ),
   }),
@@ -116,25 +117,24 @@ export default function FeatureBlog() {
   return (
     <div className="flex flex-col min-h-screen mx-auto py-5 px-4 sm:px-6 lg:px-8">
       <div className="mb-4 relative">
-        <input
+        <TextInput
           value={globalFilter ?? ""}
           onChange={(e) => setGlobalFilter(e.target.value)}
           placeholder="Search..."
-          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
         />
         <Search
-          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
           size={20}
         />
       </div>
 
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="overflow-x-auto  shadow-md rounded-lg">
+        <Table className="min-w-full divide-y divide-gray-200">
+          <Table.Body className="bg-gray-50">
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
+              <Table.Row key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <th
+                  <Table.Cell
                     key={header.id}
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
@@ -152,33 +152,32 @@ export default function FeatureBlog() {
                       )}
                       <ArrowUpDown className="ml-2" size={14} />
                     </div>
-                  </th>
+                  </Table.Cell>
                 ))}
-              </tr>
+              </Table.Row>
             ))}
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          </Table.Body>
+          <Table.Body className="">
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="hover:bg-gray-50">
+              <Table.Row key={row.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                 {row.getVisibleCells().map((cell) => (
-                  <td
+                  <Table.Cell
                     key={cell.id}
-                    className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                    className=""
                   >
                     <Link  to={`/blog/${row.original._id}`}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Link>
-                  </td>
+                  </Table.Cell>
                 ))}
-              </tr>
+              </Table.Row>
             ))}
-          </tbody>
-        </table>
+          </Table.Body>
+        </Table>
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm text-gray-700">
+      <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm">
         <div className="flex items-center mb-4 sm:mb-0">
           <span className="mr-2">Items per page</span>
-          <select
-            className="border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"
+          <Select
             value={table.getState().pagination?.pageSize ?? 5}
             onChange={(e) => {
               table.setPageSize(Number(e.target.value));
@@ -189,7 +188,7 @@ export default function FeatureBlog() {
                 {pageSize}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
 
         <div className="flex items-center space-x-2">
@@ -210,7 +209,7 @@ export default function FeatureBlog() {
           </button>
 
           <span className="flex items-center">
-            <input
+            <TextInput
               min={1}
               max={table.getPageCount()}
               type="number"
@@ -219,7 +218,7 @@ export default function FeatureBlog() {
                 const page = e.target.value ? Number(e.target.value) - 1 : 0;
                 table.setPageIndex(page);
               }}
-              className="w-16 p-2 rounded-md border border-gray-300 text-center"
+              className="w-16 p-2 rounded-md  text-center"
             />
             <span className="ml-1">of {table.getPageCount()}</span>
           </span>

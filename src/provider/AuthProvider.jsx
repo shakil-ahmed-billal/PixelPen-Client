@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
@@ -14,6 +14,11 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
+
+  // log in user function
+  const userLogin = (email , password) =>{
+    return signInWithEmailAndPassword(auth , email , password )
+  }
   // create a new user 
   const createUser = (email, password) => {
     setLoading(true)
@@ -33,6 +38,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     googleLogin,
     LogOutUser,
+    userLogin,
     loading,
     user,
   }

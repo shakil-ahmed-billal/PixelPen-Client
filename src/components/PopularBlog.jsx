@@ -24,7 +24,7 @@ const PopularBlog = () => {
         <div className="flex flex-wrap gap-1">
             {popularBlog.map(blog => <div key={blog._id}>
                 <div className="">
-                    <Link to={`/blog/${blog._id}`}><img className='w-40 h-40 rounded-xl object-cover' src={blog.imageURL} alt="" /></Link>
+                    <Link to={`/blog/${blog._id}`}><img className='w-60 h-60 rounded-xl object-cover' src={blog.imageURL} alt="" /></Link>
                 </div>
             </div>)}
         </div>

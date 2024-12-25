@@ -10,6 +10,7 @@ import UpdateBlog from "../pages/UpdateBlog";
 import FeatureBlog from "../pages/FeatureBlog";
 import WatchList from "../pages/WatchList";
 import PrivateRoute from "../private/PrivateRoute";
+import Register from "../pages/Register";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>
+            },
+            {
+                path: '/register',
+                element: <Register></Register>
             },
             {
                 path: '/add-blog',
