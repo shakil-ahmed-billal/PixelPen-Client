@@ -3,6 +3,7 @@ import axios from 'axios'
 import useAuth from "../hooks/useAuth"
 import { useParams } from "react-router-dom"
 import { Select, Textarea, TextInput } from "flowbite-react"
+import toast from "react-hot-toast"
 const UpdateBlog = () => {
 
     const {user} = useAuth()
@@ -43,6 +44,11 @@ const UpdateBlog = () => {
 
         const {data} = await axios.put(`${import.meta.env.VITE_LINK}/update-blog/${_id}` , blog)
         console.log(data)
+        if(data){
+            toast.success('blog information update')
+        }else{
+            toast.error('cannot update this information')
+        }
     }
 
     return (
@@ -67,6 +73,7 @@ const UpdateBlog = () => {
                                     name='title'
                                     type='text'
                                     defaultValue={title}
+                                    required
                                 />
                             </div>
                             <div>
@@ -79,7 +86,7 @@ const UpdateBlog = () => {
                                     name='imageURL'
                                     defaultValue={imageURL}
                                     onChange={(e) => setImage(e.target.value)}
-         
+                                    required
                                 />
                             </div>
                             <div className='flex flex-col gap-2 '>
@@ -91,6 +98,7 @@ const UpdateBlog = () => {
                                     defaultValue={category}
                                     id='category'
                                     className=''
+                                    required
                                 >
                                     <option value='Travel'>Travel</option>
                                     <option value='Technology'>Technology</option>
@@ -106,7 +114,7 @@ const UpdateBlog = () => {
                             </label>
                             <Textarea
                                 defaultValue={shortDescription}
-
+                                required
                                 name='sort_description'
                                 id='description'
                             ></Textarea>
@@ -119,6 +127,7 @@ const UpdateBlog = () => {
                                 defaultValue={longDescription}
                                 name='long_description'
                                 id='description'
+                                required={true}
                             ></Textarea>
                         </div>
                         <div className='flex justify-end mt-6'>

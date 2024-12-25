@@ -9,6 +9,7 @@ import AllBlogs from "../pages/AllBlogs";
 import UpdateBlog from "../pages/UpdateBlog";
 import FeatureBlog from "../pages/FeatureBlog";
 import WatchList from "../pages/WatchList";
+import PrivateRoute from "../private/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -25,7 +26,9 @@ const router = createBrowserRouter([
             },
             {
                 path: '/add-blog',
-                element: <AddBlog></AddBlog>
+                element: <PrivateRoute>
+                    <AddBlog></AddBlog>
+                </PrivateRoute>
             },
             {
                 path: '/blog/:id',
@@ -38,7 +41,9 @@ const router = createBrowserRouter([
             },
             {
                 path: '/update-blog/:id',
-                element: <UpdateBlog></UpdateBlog>
+                element: <PrivateRoute>
+                    <UpdateBlog></UpdateBlog>
+                </PrivateRoute>
             },
             {
                 path: '/feature-blog',
@@ -46,7 +51,9 @@ const router = createBrowserRouter([
             },
             {
                 path: '/watch-list' , 
-                element: <WatchList></WatchList>
+                element: <PrivateRoute>
+                    <WatchList></WatchList>
+                </PrivateRoute>
             }
         ]
     }

@@ -63,7 +63,7 @@ export function Header() {
                 <NavbarLink><NavLink to={'/'}>Home</NavLink></NavbarLink>
                 <NavbarLink><NavLink to={'/add-blog'}>Add Blog</NavLink></NavbarLink>
                 <NavbarLink><NavLink to={'/all-blogs'}>All Blogs</NavLink></NavbarLink>
-                <NavbarLink><NavLink to={'/watch-list'}>WatchList</NavLink></NavbarLink>
+                <NavbarLink><NavLink to={'/watch-list'}>WishList</NavLink></NavbarLink>
                 <NavbarLink><NavLink to={'/feature-blog'}>Feature Blog</NavLink></NavbarLink>
 
                 {/* <NavbarLink href="#"></NavbarLink> */}

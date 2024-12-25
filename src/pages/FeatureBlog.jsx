@@ -12,23 +12,27 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-  Mail,
-  Phone,
+  DessertIcon,
+  Image,
+  ListFilter,
+  MessageCircle,
   Search,
   User,
+  Watch,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 
 const columnHelper = createColumnHelper();
 
 const columns = [
-  columnHelper.accessor("_id", {
-    cell: (info) => info.getValue(),
+  columnHelper.accessor("imageURL", {
+    cell: (info) => <img className="w-24 h-24 object-cover" src={info.getValue()} alt="" />,
     header: () => (
       <span className="flex items-center">
-        <User className="mr-2" size={16} /> ID
+        <Image className="mr-2" size={16} /> ID
       </span>
     ),
   }),
@@ -41,27 +45,42 @@ const columns = [
       </span>
     ),
   }),
-  columnHelper.accessor("userEmail", {
+  columnHelper.accessor("longDescription", {
     cell: (info) => (
-      <span className="italic text-blue-600">{info.getValue()}</span>
+      <span className="italic text-blue-600">{info.getValue().slice(0,20)}</span>
     ),
     header: () => (
       <span className="flex items-center">
-        <Mail className="mr-2" size={16} /> Email
+        <DessertIcon className="mr-2" size={16} /> description
       </span>
     ),
   }),
   columnHelper.accessor("category", {
     header: () => (
       <span className="flex items-center">
-        <Phone className="mr-2" size={16} /> Category
+        <ListFilter className="mr-2" size={16} /> Category
       </span>
     ),
     cell: (info) => info.getValue(),
   }),
+  columnHelper.accessor("postTime", {
+    cell: (info) => <p>{format(new Date(info.getValue()),"P")}</p>,
+    header: () => (
+      <span className="flex items-center">
+        <Watch className="mr-2" size={16} /> Post Tome
+      </span>
+    ),
+  }),
+  columnHelper.accessor("comment", {
+    cell: (info) => info.getValue(),
+    header: () => (
+      <span className="flex items-center">
+        <MessageCircle className="mr-2" size={16} />Comment</span>
+    ),
+  }),
 ];
 
-export default function App() {
+export default function FeatureBlog() {
   const [blogs, setBlogs] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [globalFilter, setGlobalFilter] = useState("");

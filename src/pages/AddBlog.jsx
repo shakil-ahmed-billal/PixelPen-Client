@@ -3,6 +3,7 @@ import axios from 'axios'
 import useAuth from "../hooks/useAuth"
 import { Select, Textarea, TextInput } from 'flowbite-react';
 import logo from '../assets/log.jpg'
+import toast from "react-hot-toast";
 
 const AddBlog = () => {
 
@@ -29,7 +30,11 @@ const AddBlog = () => {
 
         const {data} = await axios.post(`${import.meta.env.VITE_LINK}/add-blog` , blog)
         console.log(data)
-
+        if(data){
+            toast.success('blog post successfully')
+        }else{
+            toast.error('blog cannot post')
+        }
 
     }
 

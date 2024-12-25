@@ -1,11 +1,13 @@
 import axios from "axios"
 import { format } from "date-fns"
 import { Button } from "flowbite-react"
+import { ArrowBigLeft } from "lucide-react"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import imageBrand from '../assets/celebration.jpg'
 import NewsLetter from "../components/NewsLeter"
 import RecentBlog from "../components/RecentBlog"
-import { ArrowBigLeft } from "lucide-react"
-import imageBrand from '../assets/celebration.jpg'
+import PopularBlog from "../components/PopularBlog"
 
 
 const Home = () => {
@@ -41,15 +43,17 @@ const Home = () => {
               <div className="">
                 {blogs.slice(0, 5).map(item => <div key={item._id} className="mb-3">
                   <hr className="p-1 border-[#3D4755]" />
-                  <div className="flex gap-2">
-                    <div className="">
-                      <img referrerPolicy="no-referrer" className="rounded-full w-24 object-cover" src={item.userPhoto} alt="" />
+                  <Link to={`/blog/${item._id}`}>
+                    <div className="flex gap-2">
+                      <div className="">
+                        <img referrerPolicy="no-referrer" className="rounded-full w-24 object-cover" src={item.userPhoto} alt="" />
+                      </div>
+                      <div className="">
+                        <p className="text-white font-semibold text-sm">Title: {item.title.slice(0, 50)}</p>
+                        <p className="text-[#8F9AA5] text-xs">Date: {format(new Date(item.postTime), 'P')}</p>
+                      </div>
                     </div>
-                    <div className="">
-                      <p className="text-white font-semibold text-sm">Name: {item.title.slice(0, 50)}</p>
-                      <p className="text-[#8F9AA5] text-xs">Date: {format(new Date(item.postTime), 'P')}</p>
-                    </div>
-                  </div>
+                  </Link>
                 </div>)}
               </div>
             </div>
@@ -84,6 +88,23 @@ const Home = () => {
               <p>Katen Doe</p><span className="text-red-500">.</span><p>17 August 2024</p>
             </div>
           </div>
+          <div className="border border-[#3D4755] p-3 rounded-xl my-4">
+            <p className="text-xl font-bold">Tag Clouds</p>
+            <div className="border-color my-4"></div>
+            <div className="flex flex-wrap text-gray-400 gap-2">
+              <p className="border-[#3D4755] px-3 rounded-full border  py-2">#Audio</p>
+              <p className="border-[#3D4755] px-3 rounded-full border  py-2">#Content</p>
+              <p className="border-[#3D4755] px-3 rounded-full border  py-2">#Featured</p>
+              <p className="border-[#3D4755] px-3 rounded-full border  py-2">#Image</p>
+              <p className="border-[#3D4755] px-3 rounded-full border  py-2">#Inspiration</p>
+              <p className="border-[#3D4755] px-3 rounded-full border  py-2">#Lifestyle</p>
+              <p className="border-[#3D4755] px-3 rounded-full border  py-2">#Photo</p>
+              <p className="border-[#3D4755] px-3 rounded-full border  py-2">#Pick</p>
+              <p className="border-[#3D4755] px-3 rounded-full border  py-2">#Slide</p>
+              <p className="border-[#3D4755] px-3 rounded-full border  py-2">#Trending</p>
+
+            </div>
+          </div>
         </div>
         {/* category section */}
         {/* resend blog section */}
@@ -92,9 +113,15 @@ const Home = () => {
         </div>
         {/* resend blog section */}
       </div>
+      {/* extra section number 1 */}
+      <div className="">
+      <PopularBlog></PopularBlog>
+      </div>
+      {/* extra section number 1 */}
       {/* newsLater section */}
       <NewsLetter></NewsLetter>
       {/* newsLater section */}
+      
     </div>
   )
 }

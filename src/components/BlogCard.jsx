@@ -102,8 +102,8 @@ const BlogCard = ({blog}) => {
                             <span className="text-base font-semibold">leroy_jenkins72</span>Nemo ea quasi debitis impedit!
                         </p>
                         <div className="w-full flex gap-3">
-                        <TextInput type="text" placeholder="Add a comment..." className="w-full py-0.5 dark:bg- border-none rounded text-sm pl-0 dark:text-gray-800" spellCheck="false" data-ms-editor="true" />
-                        <button className="flex bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 items-center justify-center"><Send></Send></button>
+                        <TextInput type="text" placeholder="Add a comment..." className="w-full py-0.5" spellCheck="false" data-ms-editor="true" />
+                        <button className="flex bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-3 items-center justify-center"><Send></Send></button>
                         </div>
                     </div>
                 </div>
