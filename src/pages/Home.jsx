@@ -4,6 +4,9 @@ import { Button } from "flowbite-react"
 import { useEffect, useState } from "react"
 import NewsLetter from "../components/NewsLeter"
 import RecentBlog from "../components/RecentBlog"
+import { ArrowBigLeft } from "lucide-react"
+import imageBrand from '../assets/celebration.jpg'
+
 
 const Home = () => {
 
@@ -40,7 +43,7 @@ const Home = () => {
                   <hr className="p-1 border-[#3D4755]" />
                   <div className="flex gap-2">
                     <div className="">
-                      <img className="rounded-full w-24 object-cover" src={item.userPhoto} alt="" />
+                      <img referrerPolicy="no-referrer" className="rounded-full w-24 object-cover" src={item.userPhoto} alt="" />
                     </div>
                     <div className="">
                       <p className="text-white font-semibold text-sm">Name: {item.title.slice(0, 50)}</p>
@@ -58,7 +61,29 @@ const Home = () => {
       <div className="grid grid-cols-8 gap-10 my-10">
         {/* category section */}
         <div className="col-span-2">
-
+          <div className="border border-[#3D4755] rounded-lg p-5">
+            <p className="text-center text-xl font-semibold  mb-4">Explore Topic</p>
+            <div className="border-color" />
+            <div className="space-y-2 mt-3">
+              <p className="flex items-center"><ArrowBigLeft></ArrowBigLeft> Travel</p>
+              <p className="flex items-center"><ArrowBigLeft></ArrowBigLeft> Technology</p>
+              <p className="flex items-center"><ArrowBigLeft></ArrowBigLeft> Lifestyle</p>
+              <p className="flex items-center"><ArrowBigLeft></ArrowBigLeft> Food and Cooking</p>
+              <p className="flex items-center"><ArrowBigLeft></ArrowBigLeft> Finance and Business</p>
+            </div>
+          </div>
+          <div className="border border-[#3D4755] rounded-lg p-5 mt-4">
+            <p className="text-center text-xl font-semibold mb-3">Celebration</p>
+            <div className="border-color mb-3"></div>
+            <div className="relative">
+              <img className="rounded-md" src={imageBrand} alt="" />
+              <button className="absolute top-2 left-2 bg-gradient-to-r from-red-500 to-yellow-500 rounded-full font-bold px-3">celebration</button>
+            </div>
+            <p className="text-xl  font-bold my-3">What Can You Do About Fashion Right Now</p>
+            <div className="flex">
+              <p>Katen Doe</p><span className="text-red-500">.</span><p>17 August 2024</p>
+            </div>
+          </div>
         </div>
         {/* category section */}
         {/* resend blog section */}

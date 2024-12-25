@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { format } from 'date-fns'
 import { Button, Label, Textarea } from 'flowbite-react'
-import { MessageCircle } from 'lucide-react'
+import { Edit, Eye, MessageCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 
 const BlogsDetails = () => {
@@ -85,11 +85,17 @@ const BlogsDetails = () => {
                 <div className="my-5">
                     <p className='text-[#8F9BAD] py-3'>PixelPen / {category} / {title?.slice(0, 50)}</p>
                     <p className='text-4xl font-bold text-white'>{title}</p>
+                    <div className="flex justify-between items-center">
                     <div className="flex gap-3 my-3 items-center py-3">
                         <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
                         <p>{userName}</p><span className='text-[#FE4F70]'>.</span><p>{category}</p>
                         <span className='text-[#FE4F70]'>.</span><p>Date: 12/12/12</p> <span className='text-[#FE4F70]'>.</span>
                         <p><MessageCircle />{message}</p>
+                    </div>
+                    <div className="mr-5">
+                        <button onClick={handleWatchList} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-3 mr-2'><Eye /></button>
+                        <Link to={`/update-blog/${_id}`}><button className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-3'><Edit></Edit></button></Link>
+                    </div>
                     </div>
                     <div className="">
                         <img className='w-full h-[450px] object-cover' src={imageURL} alt="" />

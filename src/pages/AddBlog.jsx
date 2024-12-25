@@ -1,6 +1,9 @@
 import { useState } from "react"
 import axios from 'axios'
 import useAuth from "../hooks/useAuth"
+import { Select, Textarea, TextInput } from 'flowbite-react';
+import logo from '../assets/log.jpg'
+
 const AddBlog = () => {
 
     const [blogImage, setImage] = useState('')
@@ -27,83 +30,79 @@ const AddBlog = () => {
         const {data} = await axios.post(`${import.meta.env.VITE_LINK}/add-blog` , blog)
         console.log(data)
 
+
     }
 
     return (
         <div>
-            <div className='flex justify-center items-center mt-10'>
-                <div className="w-6/12 h-full object-cover">
-                    <img src={blogImage && blogImage} alt="" />
+            <div className='grid grid-cols-2 justify-center items-center mt-10'>
+                <div className="h-[520px] object-cover">
+                    <img className="h-full w-full object-cover" src={blogImage ? blogImage : logo } alt="" />
                 </div>
-                <section className=' p-2 md:p-6 mx-auto bg-white rounded-md shadow-md '>
-                    <h2 className='text-lg font-semibold text-gray-700 capitalize '>
-                        Post a Job
+                <section className=' p-2 md:p-6 mx-auto border border-[#3D4755] rounded-md shadow-md '>
+                    <h2 className='text-xl font-bold capitalize '>
+                        Post a Blog
                     </h2>
 
-                    <form onSubmit={handleForm}>
+                    <form onSubmit={handleForm} className="font-semibold">
                         <div className='grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2'>
                             <div>
-                                <label className='text-gray-700 ' htmlFor='job_title'>
+                                <label className='' htmlFor='job_title'>
                                     Post Title
                                 </label>
-                                <input
+                                <TextInput
                                     id='title'
                                     name='title'
                                     type='text'
-                                    className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
                                 />
                             </div>
                             <div>
-                                <label className='text-gray-700 ' htmlFor='emailAddress'>
+                                <label htmlFor='emailAddress'>
                                     Image URL
                                 </label>
-                                <input
+                                <TextInput
                                     id='url'
                                     type='url'
                                     name='imageURL'
                                     onChange={(e) => setImage(e.target.value)}
-                                    className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
                                 />
                             </div>
-                            <div className='flex flex-col gap-2 dark:text-slate-800'>
+                            <div className='flex flex-col gap-2'>
                                 <label className='' htmlFor='category'>
                                     Category
                                 </label>
-                                <select
+                                <Select
                                     name='category'
                                     id='category'
-                                    className='border p-2 rounded-md'
                                 >
                                     <option value='Travel'>Travel</option>
                                     <option value='Technology'>Technology</option>
                                     <option value='Lifestyle'>Lifestyle</option>
                                     <option value='Food and Cooking'>Food and Cooking</option>
                                     <option value='Finance and Business'>Finance and Business</option>
-                                </select>
+                                </Select>
                             </div>
                         </div>
                         <div className='flex flex-col gap-2 mt-4'>
-                            <label className='text-gray-700 ' htmlFor='description'>
+                            <label className=' ' htmlFor='description'>
                                 Sort Description
                             </label>
-                            <textarea
-                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+                            <Textarea
                                 name='sort_description'
                                 id='description'
-                            ></textarea>
+                            ></Textarea>
                         </div>
                         <div className='flex flex-col gap-2 mt-4'>
-                            <label className='text-gray-700 ' htmlFor='description'>
+                            <label className='' htmlFor='description'>
                                 Long Description
                             </label>
-                            <textarea
-                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+                            <Textarea
                                 name='long_description'
                                 id='description'
-                            ></textarea>
+                            ></Textarea>
                         </div>
                         <div className='flex justify-end mt-6'>
-                            <button className='disabled:cursor-not-allowed px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600'>
+                            <button className='btn-custom'>
                                 {/* {isPending ? 'Saving...' : 'Save'} */} Post Blog
                             </button>
                         </div>

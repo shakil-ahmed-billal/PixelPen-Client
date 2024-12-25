@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { Button, TextInput } from "flowbite-react";
-import { ClockArrowUp, ListCheckIcon, MessageCircle, Send } from "lucide-react";
+import { ClockArrowUp, Eye, ListCheckIcon, MessageCircle, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
@@ -81,7 +81,7 @@ const BlogCard = ({blog}) => {
                             </button>
                         </div>
                         <button onClick={handleWatchList} type="button" title="Bookmark post" className="flex items-center justify-center bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 mr-1">
-                         <ClockArrowUp />
+                         <Eye />
                         </button>
                     </div>
                     <div className="flex flex-wrap items-center pt-3 pb-1">

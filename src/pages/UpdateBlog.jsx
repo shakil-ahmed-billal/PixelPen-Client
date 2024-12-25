@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import useAuth from "../hooks/useAuth"
 import { useParams } from "react-router-dom"
+import { Select, Textarea, TextInput } from "flowbite-react"
 const UpdateBlog = () => {
 
     const {user} = useAuth()
@@ -9,7 +10,7 @@ const UpdateBlog = () => {
     const [details , setDetails] = useState([])
     
     
-    const {title, imageURL, sort_description , longDescription, category, postTime, userName, userEmail, userPhoto, _id } = details[0] || {}
+    const {title, imageURL, shortDescription , longDescription, category, postTime, userName, userEmail, userPhoto, _id } = details[0] || {}
 
     const [blogImage, setImage] = useState('')
 
@@ -40,92 +41,89 @@ const UpdateBlog = () => {
         const blog = { title, imageURL, shortDescription, longDescription, category  , postTime , userName , userEmail ,userPhoto , comment:0}
         console.log(blog)
 
-        const {data} = await axios.post(`${import.meta.env.VITE_LINK}/add-blog` , blog)
+        const {data} = await axios.put(`${import.meta.env.VITE_LINK}/update-blog/${_id}` , blog)
         console.log(data)
-
     }
 
     return (
         <div>
-            <div className='flex justify-center items-center mt-10'>
-                <div className="w-6/12 h-full object-cover">
-                    <img src={blogImage && blogImage} alt="" />
+            <div className='grid grid-cols-2 justify-center items-center mt-10'>
+                <div className="h-[520px] object-cover">
+                    <img className="h-full w-full object-cover" src={blogImage && blogImage} alt="" />
                 </div>
-                <section className=' p-2 md:p-6 mx-auto bg-white rounded-md shadow-md '>
-                    <h2 className='text-lg font-semibold text-gray-700 capitalize '>
-                        Post a Job
+                <section className=' p-2 md:p-6 mx-auto border border-[#3D4755] rounded-md shadow-md '>
+                    <h2 className='text-lg font-semibold capitalize '>
+                        Update a Job
                     </h2>
 
                     <form onSubmit={handleForm}>
                         <div className='grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2'>
                             <div>
-                                <label className='text-gray-700 ' htmlFor='job_title'>
-                                    Post Title
+                                <label className='t' htmlFor='job_title'>
+                                    Update Title
                                 </label>
-                                <input
+                                <TextInput
                                     id='title'
                                     name='title'
                                     type='text'
                                     defaultValue={title}
-                                    className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
                                 />
                             </div>
                             <div>
-                                <label className='text-gray-700 ' htmlFor='emailAddress'>
+                                <label className='' htmlFor='emailAddress'>
                                     Image URL
                                 </label>
-                                <input
+                                <TextInput
                                     id='url'
                                     type='url'
                                     name='imageURL'
                                     defaultValue={imageURL}
                                     onChange={(e) => setImage(e.target.value)}
-                                    className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+         
                                 />
                             </div>
-                            <div className='flex flex-col gap-2 dark:text-slate-800'>
+                            <div className='flex flex-col gap-2 '>
                                 <label className='' htmlFor='category'>
                                     Category
                                 </label>
-                                <select
+                                <Select
                                     name='category'
                                     defaultValue={category}
                                     id='category'
-                                    className='border p-2 rounded-md'
+                                    className=''
                                 >
-                                    <option value='Web Development'>Travel</option>
-                                    <option value='Graphics Design'>Technology</option>
-                                    <option value='Digital Marketing'>Lifestyle</option>
-                                    <option value='Digital Marketing'>Food and Cooking</option>
-                                    <option value='Digital Marketing'>Finance and Business</option>
-                                </select>
+                                    <option value='Travel'>Travel</option>
+                                    <option value='Technology'>Technology</option>
+                                    <option value='Lifestyle'>Lifestyle</option>
+                                    <option value='Food and Cooking'>Food and Cooking</option>
+                                    <option value='Finance and Business'>Finance and Business</option>
+                                </Select>
                             </div>
                         </div>
                         <div className='flex flex-col gap-2 mt-4'>
-                            <label className='text-gray-700 ' htmlFor='description'>
+                            <label className='' htmlFor='description'>
                                 Sort Description
                             </label>
-                            <textarea
-                                defaultValue={sort_description}
-                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+                            <Textarea
+                                defaultValue={shortDescription}
+
                                 name='sort_description'
                                 id='description'
-                            ></textarea>
+                            ></Textarea>
                         </div>
                         <div className='flex flex-col gap-2 mt-4'>
-                            <label className='text-gray-700 ' htmlFor='description'>
+                            <label className=' ' htmlFor='description'>
                                 Long Description
                             </label>
-                            <textarea
+                            <Textarea
                                 defaultValue={longDescription}
-                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
                                 name='long_description'
                                 id='description'
-                            ></textarea>
+                            ></Textarea>
                         </div>
                         <div className='flex justify-end mt-6'>
-                            <button className='disabled:cursor-not-allowed px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600'>
-                                {/* {isPending ? 'Saving...' : 'Save'} */} Post Blog
+                            <button className='btn-custom'>
+                                {/* {isPending ? 'Saving...' : 'Save'} */} Update Blog
                             </button>
                         </div>
                     </form>

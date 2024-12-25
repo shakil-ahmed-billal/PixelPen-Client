@@ -58,7 +58,7 @@ const AllBlogs = () => {
                         <option value='Finance and Business'>Finance and Business</option>
                     </Select>
                 </div>
-                <Link className='btn-custom'>Blog Post</Link>
+                <Link to={`/add-blog`} className='btn-custom'>Blog Post</Link>
             </div>
             {loading ? <p>Loading</p> : <div className="">
                 <div className="grid grid-cols-2 gap-10 my-10">
