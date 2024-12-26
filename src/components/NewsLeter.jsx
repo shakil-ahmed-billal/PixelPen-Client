@@ -32,14 +32,14 @@ const NewsLetter = () => {
                 </div>
 
                 <form onSubmit={handleForm} className="relative mt-12 mb-6">
-                    <input className="py-3 pr-4 pl-12 w-full outline-none"
+                    <input className="py-3 pr-4 pl-12 w-full outline-none z-100"
                         name="email" placeholder="Email Address" />
 
                     <MdOutlineMail
                         className="p-1.5 bg-[#F8F8F8] text-[#6C777C] text-[2rem] absolute top-[50%] left-2 transform translate-y-[-50%]" />
 
                     <button
-                        className="absolute bottom-[-20px] right-[-20px] bg-[#825FF1] hover:bg-[#7755e8] text-white py-3 px-8">subscribe
+                        className="absolute -bottom-[40px] md:bottom-[-20px] right-[-20px] bg-[#825FF1] hover:bg-[#7755e8] text-white py-3 px-8">subscribe
                     </button>
                 </form>
             </div>

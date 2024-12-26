@@ -36,7 +36,6 @@ const BlogCard = ({ blog }) => {
 
         if (data) {
             toast.success(`This Blog Add WishList Successfully`)
-            navigate('/watch-list')
         }
     }
 

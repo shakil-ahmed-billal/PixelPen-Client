@@ -114,7 +114,7 @@ const BlogsDetails = () => {
             <div className="col-span-4">
                 <div className="my-5">
                     <p className='text-[#8F9BAD] py-3'>PixelPen / {category} / {title?.slice(0, 50)}</p>
-                    <p className='md:text-4xl font-bold text-white'>{title || <Skeleton></Skeleton>}</p>
+                    <p className='md:text-4xl font-bold dark:text-white'>{title || <Skeleton></Skeleton>}</p>
                     <div className="flex flex-wrap justify-between items-center text-xs">
                         <div className="flex gap-3 md:my-3 items-center py-3">
                             <PhotoProvider>
@@ -146,7 +146,7 @@ const BlogsDetails = () => {
                 <div className="">
                     <form onSubmit={handleComment}>
                         <div className="mb-2 block mt-5">
-                            <Label className='text-2xl' htmlFor="comment" value="Your message" />
+                            {user.email !== userEmail?<Label className='text-2xl' htmlFor="comment" value="Your message" />: <p className='text-2xl font-semibold text-rose-600'>Own Cannot Comment send</p>}
                         </div>
                         <div className="flex gap-3">
                             <Textarea name='comment' id="comment" className='w-full' placeholder="Leave a comment..." required rows={1} />
@@ -165,8 +165,8 @@ const BlogsDetails = () => {
                                     <img className="rounded-full w-16 object-cover" src={item.authorPhoto} alt="" />
                                 </div>
                                 <div className="">
-                                    <p className='text-white font-semibold text-sm'>Name: {item.name}</p>
-                                    <p className="text-white font-semibold text-sm">Comment: {item.commentText}</p>
+                                    <p className='dark:text-white font-semibold text-sm'>Name: {item.name}</p>
+                                    <p className="dark:text-white font-semibold text-sm">Comment: {item.commentText}</p>
                                     <p className="text-[#8F9AA5] text-xs">Date: {format(new Date(item.commentDate), 'P')}</p>
                                 </div>
                             </div>
