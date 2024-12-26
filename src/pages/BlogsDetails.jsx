@@ -96,7 +96,7 @@ const BlogsDetails = () => {
  
 
 
-        if (user.email !== userEmail) {
+        if (user?.email !== userEmail) {
             const { data } = await axios.post(`${import.meta.env.VITE_LINK}/add-comment`, postComment)
        
             if (data) {
@@ -146,7 +146,7 @@ const BlogsDetails = () => {
                 <div className="">
                     <form onSubmit={handleComment}>
                         <div className="mb-2 block mt-5">
-                            {user.email !== userEmail?<Label className='text-2xl' htmlFor="comment" value="Your message" />: <p className='text-2xl font-semibold text-rose-600'>Own Cannot Comment send</p>}
+                            {user?.email !== userEmail?<Label className='text-2xl' htmlFor="comment" value="Your message" />: <p className='text-2xl font-semibold text-rose-600'>Own Cannot Comment send</p>}
                         </div>
                         <div className="flex gap-3">
                             <Textarea name='comment' id="comment" className='w-full' placeholder="Leave a comment..." required rows={1} />
