@@ -1,13 +1,13 @@
+import { Eye, EyeOff } from "lucide-react"
 import { useContext, useState } from "react"
+import toast from "react-hot-toast"
 import { Link, useNavigate } from "react-router-dom"
 import logo from '../assets/log.jpg'
 import { AuthContext } from "../provider/AuthProvider"
-import { Eye, EyeOff } from "lucide-react"
-import toast from "react-hot-toast"
 
 const Register = () => {
 
-    const { googleLogin, createUser , userUpdate } = useContext(AuthContext)
+    const { googleLogin, createUser, userUpdate } = useContext(AuthContext)
     const navigate = useNavigate()
 
 
@@ -20,19 +20,17 @@ const Register = () => {
         const password = StrongPassword;
 
         // user account create option
-        if(strengthProgress == 100){
-      
+        if (strengthProgress == 100) {
+
             createUser(email, password)
-            .then(res => {
-                userUpdate({displayName: name , photoURL})
-                .then(res=>{
+                .then(res => {
+                    userUpdate({ displayName: name, photoURL })
                     toast.success(`Register Successful ${res.user.displayName}`)
                     navigate('/')
+                }).catch(error => {
+                    toast.error(error.message)
                 })
-            }).catch(error => {
-                toast.error(error.message)
-            })
-        }else{
+        } else {
             toast.error('Please use Strong Password')
         }
     }
@@ -75,7 +73,7 @@ const Register = () => {
             strong: hasUpperCase && hasLowerCase && hasNumber && hasSymbol && password.length >= 8
         });
     }
-  
+
     return (
         <div className='flex justify-center items-center min-h-[calc(100vh-306px)] '>
             <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>
@@ -164,31 +162,31 @@ const Register = () => {
                                 className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
                             />
                             <div className="w-full mt-2 flex items-center gap-[5px]">
-                            <div
-                                className={`${strengthProgress > 0 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
-                            <div
-                                className={`${strengthProgress > 16 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
-                            <div
-                                className={`${strengthProgress > 33 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
-                            <div
-                                className={`${strengthProgress > 50 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
-                            <div
-                                className={`${strengthProgress == 100 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
+                                <div
+                                    className={`${strengthProgress > 0 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
+                                <div
+                                    className={`${strengthProgress > 16 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
+                                <div
+                                    className={`${strengthProgress > 33 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
+                                <div
+                                    className={`${strengthProgress > 50 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
+                                <div
+                                    className={`${strengthProgress == 100 ? "bg-green-500" : "bg-gray-200"} h-[9px] w-full rounded-md`}></div>
 
+                            </div>
+                            {isEyeOpen ? (
+                                <Eye
+                                    className=" absolute top-9 right-4 text-[1.5rem] text-[#777777] cursor-pointer"
+                                    onClick={() => setIsEyeOpen(false)}
+                                />
+                            ) : (
+                                <EyeOff
+                                    className=" absolute top-9 right-4 text-[1.5rem] text-[#777777] cursor-pointer"
+                                    onClick={() => setIsEyeOpen(true)}
+                                />
+                            )}
                         </div>
-                        {isEyeOpen ? (
-                                      <Eye 
-                                          className=" absolute top-9 right-4 text-[1.5rem] text-[#777777] cursor-pointer"
-                                          onClick={() => setIsEyeOpen(false)}
-                                      />
-                                  ) : (
-                                      <EyeOff 
-                                          className=" absolute top-9 right-4 text-[1.5rem] text-[#777777] cursor-pointer"
-                                          onClick={() => setIsEyeOpen(true)}
-                                      />
-                                  )}
-                        </div>
-                        
+
                         <div className='mt-6'>
                             <button
                                 type='submit'

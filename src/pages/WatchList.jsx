@@ -84,7 +84,7 @@ const WatchList = () => {
               <TableCell className="">
                 <img className="w-20 h-10 object-cover " src={item.imageURL} alt="" />
               </TableCell>
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{item.title.slice(0, 20)}</TableCell>
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{item?.title?.slice(0, 20)}</TableCell>
               <TableCell>{item.category}</TableCell>
               <TableCell>
                 <p>{format(new Date(item.watchTime), "P")}</p>

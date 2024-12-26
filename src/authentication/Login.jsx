@@ -1,12 +1,14 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import toast from "react-hot-toast"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import logo from '../assets/log.jpg'
 import { AuthContext } from "../provider/AuthProvider"
+import { Eye, EyeOff } from "lucide-react"
 
 const Login = () => {
 
     const { googleLogin, userLogin } = useContext(AuthContext)
+    const [isEyeOpen, setIsEyeOpen] = useState(false);
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -109,11 +111,12 @@ const Login = () => {
                                 Email Address
                             </label>
                             <input
-                                id='LoggingEmailAddress'
-                                autoComplete='email'
+                                id='loggingPassword'
+                                autoComplete='current-email'
                                 name='email'
                                 className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
-                                type='email'
+                                type='password'
+                                required
                             />
                         </div>
 
@@ -127,13 +130,27 @@ const Login = () => {
                                 </label>
                             </div>
 
+                            <div className="relative">
                             <input
                                 id='loggingPassword'
                                 autoComplete='current-password'
                                 name='password'
                                 className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
-                                type='password'
+                                type={`${!isEyeOpen? 'password': 'text'}`}
+                                required
                             />
+                            {isEyeOpen ? (
+                                      <Eye 
+                                          className=" absolute top-2 right-4 text-[1.5rem] text-[#777777] cursor-pointer"
+                                          onClick={() => setIsEyeOpen(false)}
+                                      />
+                                  ) : (
+                                      <EyeOff 
+                                          className=" absolute top-2 right-4 text-[1.5rem] text-[#777777] cursor-pointer"
+                                          onClick={() => setIsEyeOpen(true)}
+                                      />
+                                  )}
+                            </div>
                         </div>
                         <div className='mt-6'>
                             <button
