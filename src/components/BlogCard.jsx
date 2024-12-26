@@ -1,75 +1,111 @@
-import { format } from "date-fns";
-import { Button, TextInput } from "flowbite-react";
-import { ClockArrowUp, Eye, ListCheckIcon, MessageCircle, Send } from "lucide-react";
-import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
 import axios from "axios";
+import { TextInput } from "flowbite-react";
+import { Eye, ListCheckIcon, MessageCircle, Send } from "lucide-react";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 
 
-const BlogCard = ({blog}) => {
+const BlogCard = ({ blog }) => {
 
 
-    const {user} = useAuth()
+    const { user } = useAuth()
+    const navigate = useNavigate()
+    const [stateComment, setComment] = useState('')
 
-    const {title, imageURL, shortDescription, longDescription, category  , postTime , userName , userEmail ,userPhoto , comment , _id} = blog || {}
+    const { title, imageURL, shortDescription, longDescription, category, postTime, userName, userEmail, userPhoto, comment, _id } = blog || {}
 
 
-    const handleWatchList = async () =>{
+    const handleWatchList = async () => {
         const watchData = {
             authorName: user.displayName,
             authorEmail: user.email,
-            watchTime: new Date() ,
+            watchTime: new Date(),
             userName,
             userPhoto,
-            blogId:_id,
+            blogId: _id,
             title,
             imageURL,
             category
         }
 
-        console.log(watchData)
 
-        const {data} = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
-        console.log(data)
-        if(data){
+        const { data } = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
+
+        if (data) {
             toast.success(`This Blog Add WishList Successfully`)
+            navigate('/watch-list')
         }
+    }
+
+    // user comment store for database
+    const handleComment = async () => {
+
+        const commentText = stateComment
+  
+
+
+        if (!user) {
+            toast.error('Please Fast LogIn Than Comment')
+            return navigate('/login')
+        }
+        if (!commentText) {
+            toast.error('Please write a message')
+            return
+        }
+        if (userEmail === user.email) {
+            toast.error('own cannot comment send')
+            return
+        }
+
+
+        const postComment = {
+            blogId: _id,
+            name: user.displayName,
+            email: user.email,
+            commentText: commentText,
+            authorPhoto: user.photoURL,
+            commentLike: 0,
+            commentDate: new Date()
+        }
+        
+
+
+        if (user.email !== userEmail) {
+            const { data } = await axios.post(`${import.meta.env.VITE_LINK}/add-comment`, postComment)
+        
+            if (data) {
+                toast.success(`Comment: ${commentText}`)
+            }
+        } else {
+            toast.error('Own cannot comment')
+        }
+
     }
 
     return (
         <div>
-            {/* <div className="border-[#818E9F] border p-5 rounded-lg">
-                <div className="">
-                    <img className="rounded-lg" src={imageURL} alt="" />
-                </div>
-                <div className="flex gap-3 items-center">
-                    <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
-                    <p>{userName}</p><span className='text-[#FE4F70]'>.</span><p>{category}</p>
-                    <span className='text-[#FE4F70]'>.</span><p>Date: 12/12/12</p> <span className='text-[#FE4F70]'>.</span>
-                    <p className='flex items-center gap-1'><MessageCircle />{comment}</p>
-                </div>
-                <p className="text-3xl font-semibold">{title}</p>
-                <p>{shortDescription}....see more</p>
-            </div> */}
             <div className="rounded-md shadow-md border border-[#818E9F] ">
-            <div className="flex gap-3 items-center p-3">
+                <div className="flex gap-3 items-center p-3 ">
                     <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
-                    <p>{userName}</p><span className='text-[#FE4F70]'>.</span><p>{category}</p>
-                    <span className='text-[#FE4F70]'>.</span><p>Date: 12/12/12</p> <span className='text-[#FE4F70]'>.</span>
+                    <div className="flex flex-wrap items-center text-sm gap-1">
+                        <p>{userName}</p><span className='text-[#FE4F70]'>.</span><p>{category}</p>
+                        <span className='text-[#FE4F70]'>.</span><p>Date: 12/12/12</p> <span className='text-[#FE4F70]'>.</span>
+                    </div>
                     <p className='flex items-center gap-1'><MessageCircle />{comment}</p>
                 </div>
-                <p className="p-3 text-2xl font-semibold">{title}</p>
-                <p className="text-[#818E9F] p-3">{shortDescription.slice(0 , 80)}... <Link to={`blog/${_id}`}>see more</Link></p>
-               <div className="">
-               <Link to={`/blog/${_id}`}> 
-               <div className="relative">
-               <img src={imageURL} alt="" className="object-cover object-center w-full h-72 dark:bg-gray-500" />
-               <div className="absolute right-5 bottom-5 z-10"><button className="bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2"><ListCheckIcon /></button></div>
-               </div>
-               </Link>
-               </div>
+                <p className="p-3 md:text-2xl font-semibold">{title}</p>
+                <p className="text-[#818E9F] p-3">{shortDescription.slice(0, 80)}... <Link to={`blog/${_id}`}>see more</Link></p>
+                <div className="">
+                    <Link to={`/blog/${_id}`}>
+                        <div className="relative">
+                            <img src={imageURL} alt="" className="object-cover object-center w-full h-72 dark:bg-gray-500" />
+                            <div className="absolute right-5 bottom-5 z-10"><button className="bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2"><ListCheckIcon /></button></div>
+                        </div>
+                    </Link>
+                </div>
                 <div className="p-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
@@ -85,7 +121,7 @@ const BlogCard = ({blog}) => {
                             </button>
                         </div>
                         <button onClick={handleWatchList} type="button" title="Bookmark post" className="flex items-center justify-center bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 mr-1">
-                         <Eye />
+                            <Eye />
                         </button>
                     </div>
                     <div className="flex flex-wrap items-center pt-3 pb-1">
@@ -106,8 +142,8 @@ const BlogCard = ({blog}) => {
                             <span className="text-base font-semibold">leroy_jenkins72</span>Nemo ea quasi debitis impedit!
                         </p>
                         <div className="w-full flex gap-3">
-                        <TextInput type="text" placeholder="Add a comment..." className="w-full py-0.5" spellCheck="false" data-ms-editor="true" />
-                        <button className="flex bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-3 items-center justify-center"><Send></Send></button>
+                            <TextInput onChange={(e) => setComment(e.target.value)} type="text" placeholder="Add a comment..." className="w-full py-0.5" spellCheck="false" data-ms-editor="true" />
+                            <button onClick={handleComment} className="flex bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-3 items-center justify-center"><Send></Send></button>
                         </div>
                     </div>
                 </div>

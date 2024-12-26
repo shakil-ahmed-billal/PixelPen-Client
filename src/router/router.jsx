@@ -53,7 +53,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/feature-blog',
-                element: <FeatureBlog></FeatureBlog>
+                element: <FeatureBlog></FeatureBlog>,
+                loader: ()=> fetch(`${import.meta.env.VITE_LINK}/blogsCount`)
             },
             {
                 path: '/watch-list' , 

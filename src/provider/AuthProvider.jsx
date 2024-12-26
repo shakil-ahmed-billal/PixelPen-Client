@@ -50,9 +50,12 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async(currentUser) => {
       setUser(currentUser)
+      const userEmail = {email: currentUser?.email}
       if(currentUser){
-        const {data} = await axios.get(`${import.meta.env.VITE_LINK}/jwt` , {withCredentials: true})
-        console.log(data)
+        const {data} = await axios.post(`${import.meta.env.VITE_LINK}/jwt`, userEmail, {withCredentials: true})
+      }else{
+        setUser(currentUser)
+        const {data} = await axios.get(`${import.meta.env.VITE_LINK}/logout` , {withCredentials: true})
       }
       setLoading(false)
     })

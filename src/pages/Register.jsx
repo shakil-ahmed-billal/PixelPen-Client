@@ -10,12 +10,6 @@ const Register = () => {
     const { googleLogin, createUser , userUpdate } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    // const handleGoogle = () => {
-    //     googleLogin()
-    //         .then(res => {
-    //             console.log(res.user)
-    //         })
-    // }
 
     const handleForm = (e) => {
         e.preventDefault()
@@ -27,7 +21,7 @@ const Register = () => {
 
         // user account create option
         if(strengthProgress == 100){
-            console.log(password)
+      
             createUser(email, password)
             .then(res => {
                 userUpdate({displayName: name , photoURL})
@@ -81,7 +75,7 @@ const Register = () => {
             strong: hasUpperCase && hasLowerCase && hasNumber && hasSymbol && password.length >= 8
         });
     }
-    console.log(StrongPassword)
+  
     return (
         <div className='flex justify-center items-center min-h-[calc(100vh-306px)] '>
             <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>

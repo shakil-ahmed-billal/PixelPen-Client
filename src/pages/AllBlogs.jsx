@@ -16,7 +16,7 @@ const AllBlogs = () => {
     const { loading } = useAuth()
 
     // pagination function make
-    const [itemPerPage , setItemPerPage] = useState(4)
+    const [itemPerPage , setItemPerPage] = useState(6)
     const [currentPage , setCurrentPage] = useState(0)
     const numberOfPages = Math.ceil(result / itemPerPage)
 
@@ -25,7 +25,7 @@ const AllBlogs = () => {
     //     pages.push(i + 1)
 
     // }
-    console.log(currentPage)
+ 
 
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const AllBlogs = () => {
 
     return (
         <div>
-            <div className="flex gap-5 mt-5 justify-between">
+            <div className="md:flex gap-5 mt-5 justify-between">
                 <div className="flex gap-2">
                     <div className="relative">
                         <TextInput onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
@@ -58,14 +58,14 @@ const AllBlogs = () => {
                         <option value='Finance and Business'>Finance and Business</option>
                     </Select>
                 </div>
-                <Link to={`/add-blog`} className='btn-custom'>Blog Post</Link>
+                <Link to={`/add-blog`} ><button className='btn-custom md:mt-0 mt-4'>Blog Post</button></Link>
             </div>
             {loading ? <p>Loading</p> : <div className="">
-                <div className="grid grid-cols-2 gap-10 my-10">
+                <div className="md:grid max-xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 gap-10 my-10">
                     {blogs && blogs?.map(blog => <BlogCard key={blog._id} blog={blog}></BlogCard>)}
                 </div>
             </div>}
-            <div className="w-full gap-2 flex justify-center">
+            <div className="w-full gap-2 flex flex-wrap justify-center">
                 {pages.map(item => <button onClick={()=>setCurrentPage(item)} className={currentPage == item? ' bg-gradient-to-r from-pink-500 to-orange-500 text-white border-white border-2 font-bold w-10 h-10 rounded-full ' : 'bg-gradient-to-r from-pink-500 to-orange-500 text-white font-bold w-10 h-10 rounded-full'} key={item}>{item}</button>)}
                 <Select onChange={(e) => handlePage(parseInt(e.target.value))} id="countries" required>
                         <option selected disabled value='Web Development'>{itemPerPage}</option>

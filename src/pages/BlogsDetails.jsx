@@ -28,7 +28,7 @@ const BlogsDetails = () => {
         const handleData = async () => {
             const { data } = await axios.get(`${import.meta.env.VITE_LINK}/blog/${id}`)
             setDetails(data)
-            // console.log(data)
+           
         }
         handleData()
         handleCommentData()
@@ -37,7 +37,6 @@ const BlogsDetails = () => {
     const handleCommentData = async () => {
         const { data } = await axios.get(`${import.meta.env.VITE_LINK}/comment/${id}`)
         setCommentData(data)
-        console.log(data)
 
     }
 
@@ -57,30 +56,33 @@ const BlogsDetails = () => {
             category
         }
 
-        console.log(watchData)
+      
 
         const { data } = await axios.post(`${import.meta.env.VITE_LINK}/watch-list`, watchData)
-        console.log(data)
+      
         if (data) {
             toast.success('This blog add WishList ✔️')
         }
     }
 
-    console.log(commentData)
+
 
     const handleComment = async (e) => {
         e.preventDefault()
 
         const form = e.target;
         const commentText = form.comment.value;
-        console.log(commentText)
+    
 
 
         if (!user) {
             toast.error('Please Fast LogIn Than Comment')
             return navigate('/login')
         }
-
+        if(!commentText){
+            toast.error('Please write a message')
+            return
+        }
 
         const postComment = {
             blogId: _id,
@@ -91,12 +93,12 @@ const BlogsDetails = () => {
             commentLike: 0,
             commentDate: new Date()
         }
-        console.log(postComment)
+ 
 
 
         if (user.email !== userEmail) {
             const { data } = await axios.post(`${import.meta.env.VITE_LINK}/add-comment`, postComment)
-            console.log(data)
+       
             if (data) {
                 handleCommentData()
                 toast.success(`Comment: ${commentText}`)
@@ -108,13 +110,13 @@ const BlogsDetails = () => {
     }
 
     return (
-        <div className='grid grid-cols-6 gap-3'>
+        <div className='md:grid grid-cols-6 gap-3'>
             <div className="col-span-4">
                 <div className="my-5">
                     <p className='text-[#8F9BAD] py-3'>PixelPen / {category} / {title?.slice(0, 50)}</p>
-                    <p className='text-4xl font-bold text-white'>{title || <Skeleton></Skeleton>}</p>
-                    <div className="flex justify-between items-center">
-                        <div className="flex gap-3 my-3 items-center py-3">
+                    <p className='md:text-4xl font-bold text-white'>{title || <Skeleton></Skeleton>}</p>
+                    <div className="flex flex-wrap justify-between items-center text-xs">
+                        <div className="flex gap-3 md:my-3 items-center py-3">
                             <PhotoProvider>
                                 <PhotoView src={userPhoto}>
                                     <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
@@ -125,8 +127,8 @@ const BlogsDetails = () => {
                             <p className='flex items-center gap-2'><MessageCircle />{comment}</p>
                         </div>
                         <div className="mr-5">
-                            <button onClick={handleWatchList} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-3 mr-2'><Eye /></button>
-                            <Link to={`/update-blog/${_id}`}><button disabled={user?.email !== userEmail} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-3'><Edit></Edit></button></Link>
+                            <button onClick={handleWatchList} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 md:p-3 mr-2'><Eye /></button>
+                            <Link to={`/update-blog/${_id}`}><button disabled={user?.email !== userEmail} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 md:p-3'><Edit></Edit></button></Link>
                         </div>
                     </div>
                     <div className="">

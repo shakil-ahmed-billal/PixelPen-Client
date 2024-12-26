@@ -24,7 +24,7 @@ const WatchList = () => {
 
   const handleData = async () => {
     const { data } = await axiosSecure.get(`/watch-list/${user.email}`)
-    console.log(data)
+ 
     setData(data)
   }
 
@@ -47,9 +47,7 @@ const WatchList = () => {
             <button
               onClick={async () => {
                 const { data } = await axios.delete(`${import.meta.env.VITE_LINK}/watch-list/${id}`)
-                console.log(data)
 
-                console.log(id)
                 if (data.deletedCount) {
                   handleData()
                   toast.dismiss(t.id)

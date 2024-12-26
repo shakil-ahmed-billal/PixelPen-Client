@@ -13,7 +13,7 @@ const Login = () => {
     const handleGoogle = () => {
         googleLogin()
             .then(res => {
-                console.log(res.user)
+                
                 if (res.user) {
                     toast.success(`Successfully Login ${res.user.displayName}`)
                     navigate(location?.state ? location.state : '/')
@@ -29,12 +29,12 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log({ email, password })
+       
 
         // user log in system
         userLogin(email, password)
             .then(res => {
-                console.log(res.user)
+                
                 toast.success(`Login Successful ${res.user.displayName}`)
                 navigate(location?.state ? location.state : '/')
             }).catch(error => {

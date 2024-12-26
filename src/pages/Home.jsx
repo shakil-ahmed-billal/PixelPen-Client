@@ -8,19 +8,21 @@ import imageBrand from '../assets/celebration.jpg'
 import NewsLetter from "../components/NewsLeter"
 import RecentBlog from "../components/RecentBlog"
 import PopularBlog from "../components/PopularBlog"
-import Loading from "../components/Loading"
+import { motion } from "motion/react"
+
 
 
 const Home = () => {
 
   const [blogs, setBlogs] = useState([])
 
+
   useEffect(() => {
 
 
 
     const handleData = async () => {
-      const { data } = await axios.get('http://localhost:5000/all-blogs')
+      const { data } = await axios.get(`${import.meta.env.VITE_LINK}/all-blogs`)
       setBlogs(data)
     }
     handleData()
@@ -29,12 +31,12 @@ const Home = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-6 my-10 gap-10">
-        <div className="col-span-4 bg-hero-bg bg-cover bg-center h-full content-end p-10 rounded-3xl">
+      <motion.div className="md:grid md:grid-cols-6 my-10 gap-10">
+        <div className="col-span-4 bg-hero-bg bg-cover bg-center h-full content-end p-10 rounded-3xl mb-5 md:mb-0">
           <button className="bg-gradient-to-r from-pink-500 to-orange-500 rounded-full px-3 py-1">inspiration<span className=" font-bold text-rose-500 ml-2">.</span></button>
-          <p className="mb-10 text-4xl font-bold ">5 Easy Ways You Can Turn Future Into Success</p>
+          <p className="mb-10 md:text-4xl text-lg font-bold ">5 Easy Ways You Can Turn Future Into Success</p>
         </div>
-        <div className="col-span-2">
+        <div className="md:col-span-2">
           <div className="border-2 border-[#3D4755] rounded-2xl p-5">
             <div className="flex gap-3 mb-5 justify-center">
               <Button>Popular</Button>
@@ -42,28 +44,37 @@ const Home = () => {
             </div>
             <div className="">
               <div className="">
-                {blogs.slice(0, 5).map(item => <div key={item._id} className="mb-3">
+                {blogs.slice(0, 6).map(item => <motion.div 
+                
+                key={item._id} className="mb-3">
                   <hr className="p-1 border-[#3D4755]" />
                   <Link to={`/blog/${item._id}`}>
-                    <div className="flex gap-2">
+                    <div className="grid grid-cols-4 items-center gap-2">
                       <div className="">
-                        <img referrerPolicy="no-referrer" className="rounded-full w-24 object-cover" src={item.userPhoto} alt="" />
+                        <motion.img 
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 ,
+                        }} 
+                        transition={{delay: 0.1}}
+                        referrerPolicy="no-referrer" 
+                        className="rounded-full object-cover" 
+                        src={item.userPhoto} alt="" />
                       </div>
-                      <div className="">
+                      <div className="col-span-3">
                         <p className="text-white font-semibold text-sm">Title: {item.title.slice(0, 50)}</p>
                         <p className="text-[#8F9AA5] text-xs">Date: {format(new Date(item.postTime), 'P')}</p>
                       </div>
                     </div>
                   </Link>
-                </div>)}
+                </motion.div>)}
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
       <p className="text-3xl font-semibold">Recent Blogs Post</p>
       <p className="border-color mt-2"></p>
-      <div className="grid grid-cols-8 gap-10 my-10">
+      <div className="md:grid md:grid-cols-8 gap-10 my-10">
         {/* category section */}
         <div className="col-span-2">
           <div className="border border-[#3D4755] rounded-lg p-5">

@@ -4,11 +4,13 @@ import useAuth from "../hooks/useAuth"
 import { useParams } from "react-router-dom"
 import { Select, Textarea, TextInput } from "flowbite-react"
 import toast from "react-hot-toast"
+import useAxiosSecure from "../hooks/useAxiosSecure"
 const UpdateBlog = () => {
 
     const {user} = useAuth()
     const {id} = useParams()
     const [details , setDetails] = useState([])
+    const axiosSecure = useAxiosSecure()
     
     
     const {title, imageURL, shortDescription , longDescription, category, postTime, userName, userEmail, userPhoto, _id } = details[0] || {}
@@ -40,10 +42,10 @@ const UpdateBlog = () => {
         const userPhoto = user.photoURL;
 
         const blog = { title, imageURL, shortDescription, longDescription, category  , postTime , userName , userEmail ,userPhoto , comment:0}
-        console.log(blog)
+        
 
-        const {data} = await axios.put(`${import.meta.env.VITE_LINK}/update-blog/${_id}` , blog)
-        console.log(data)
+        const {data} = await axiosSecure.put(`/update-blog/${_id}` , blog)
+        
         if(data){
             toast.success('blog information update')
         }else{
@@ -53,7 +55,7 @@ const UpdateBlog = () => {
 
     return (
         <div>
-            <div className='grid grid-cols-2 justify-center items-center mt-10'>
+            <div className='md:grid grid-cols-2 justify-center items-center mt-10'>
                 <div className="h-[520px] object-cover">
                     <img className="h-full w-full object-cover" src={blogImage && blogImage} alt="" />
                 </div>

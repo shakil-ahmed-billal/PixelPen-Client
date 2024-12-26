@@ -15,7 +15,7 @@ const PopularBlog = () => {
         handleData()
     },[])
 
-    console.log(popularBlog)
+
   return (
     <div className=''>
       <div className="my-5">
@@ -24,7 +24,7 @@ const PopularBlog = () => {
         <div className="flex justify-center items-center flex-wrap gap-1">
             {popularBlog.map(blog => <div key={blog._id}>
                 <div className="">
-                    <Link to={`/blog/${blog._id}`}><img className='w-60 h-60 rounded-xl object-cover' src={blog.imageURL} alt="" /></Link>
+                    <Link to={`/blog/${blog._id}`}><img className='md:w-60 w-20 h-60 rounded-xl object-cover' src={blog.imageURL} alt="" /></Link>
                 </div>
             </div>)}
         </div>

@@ -1,19 +1,19 @@
 
 import React from "react";
 import toast from "react-hot-toast";
-import {MdOutlineMail} from "react-icons/md";
+import { MdOutlineMail } from "react-icons/md";
 
 const NewsLetter = () => {
 
 
-    const handleForm = (e) =>{
+    const handleForm = (e) => {
         e.preventDefault()
         const form = e.target;
         const email = form.email.value;
-        console.log(email)
-        if(email){
-            toast.success(`Send ${email} NewsLater`)
-        }else{
+      
+        if (email) {
+            toast.success(`Send ${email}Thank you for subscribing to our newsLater`)
+        } else {
             toast.error('You are not Provide Email Sorry')
         }
     }
@@ -33,10 +33,10 @@ const NewsLetter = () => {
 
                 <form onSubmit={handleForm} className="relative mt-12 mb-6">
                     <input className="py-3 pr-4 pl-12 w-full outline-none"
-                          name="email" placeholder="Email Address"/>
-                           
+                        name="email" placeholder="Email Address" />
+
                     <MdOutlineMail
-                        className="p-1.5 bg-[#F8F8F8] text-[#6C777C] text-[2rem] absolute top-[50%] left-2 transform translate-y-[-50%]"/>
+                        className="p-1.5 bg-[#F8F8F8] text-[#6C777C] text-[2rem] absolute top-[50%] left-2 transform translate-y-[-50%]" />
 
                     <button
                         className="absolute bottom-[-20px] right-[-20px] bg-[#825FF1] hover:bg-[#7755e8] text-white py-3 px-8">subscribe
@@ -45,10 +45,9 @@ const NewsLetter = () => {
             </div>
 
             <MdOutlineMail
-                className="text-[30rem] absolute top-[-100px] right-[-100px] text-white opacity-10 rotate-[-30deg]"/>
+                className="text-[30rem] absolute top-[-100px] right-[-100px] text-white opacity-10 rotate-[-30deg]" />
         </section>
     );
 };
 
 export default NewsLetter;
-                    

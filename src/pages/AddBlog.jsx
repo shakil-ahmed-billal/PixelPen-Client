@@ -4,13 +4,15 @@ import useAuth from "../hooks/useAuth"
 import { Select, Textarea, TextInput } from 'flowbite-react';
 import logo from '../assets/log.jpg'
 import toast from "react-hot-toast";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddBlog = () => {
 
     const [blogImage, setImage] = useState('')
     const {user} = useAuth()
+    const axiosSecure = useAxiosSecure()
 
-    console.log(user)
+   
 
     const handleForm = async (e) => {
         e.preventDefault()
@@ -26,10 +28,10 @@ const AddBlog = () => {
         const userPhoto = user.photoURL;
 
         const blog = { title, imageURL, shortDescription, longDescription, category  , postTime , userName , userEmail ,userPhoto , comment:0}
-        console.log(blog)
+        
 
-        const {data} = await axios.post(`${import.meta.env.VITE_LINK}/add-blog` , blog)
-        console.log(data)
+        const {data} = await axiosSecure.post(`/add-blog` , blog)
+     
         if(data){
             toast.success('blog post successfully')
         }else{
@@ -40,7 +42,7 @@ const AddBlog = () => {
 
     return (
         <div>
-            <div className='grid grid-cols-2 justify-center items-center mt-10'>
+            <div className='md:grid grid-cols-2 justify-center items-center mt-10'>
                 <div className="h-[520px] object-cover">
                     <img className="h-full w-full object-cover" src={blogImage ? blogImage : logo } alt="" />
                 </div>

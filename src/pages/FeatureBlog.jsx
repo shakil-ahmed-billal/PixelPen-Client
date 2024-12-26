@@ -6,25 +6,21 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import axios from "axios";
+import { format } from "date-fns";
+import { Select, Table, TextInput } from "flowbite-react";
 import {
   ArrowUpDown,
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
   DessertIcon,
   Image,
   ListFilter,
   MessageCircle,
   Search,
   User,
-  Watch,
+  Watch
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { format } from "date-fns";
-import { Select, Table, TextInput } from "flowbite-react";
+import { Link, useLoaderData } from "react-router-dom";
 
 const columnHelper = createColumnHelper();
 
@@ -48,7 +44,7 @@ const columns = [
   }),
   columnHelper.accessor("longDescription", {
     cell: (info) => (
-      <span className="italic text-blue-600">{info.getValue().slice(0,20)}</span>
+      <span className="italic text-blue-600">{info.getValue().slice(0, 20)}</span>
     ),
     header: () => (
       <span className="flex items-center">
@@ -65,7 +61,7 @@ const columns = [
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("postTime", {
-    cell: (info) => <p>{format(new Date(info.getValue()),"P")}</p>,
+    cell: (info) => <p>{format(new Date(info.getValue()), "P")}</p>,
     header: () => (
       <span className="flex items-center">
         <Watch className="mr-2" size={16} /> Post Tome
@@ -82,9 +78,22 @@ const columns = [
 ];
 
 export default function FeatureBlog() {
+
+  const { result } = useLoaderData()
   const [blogs, setBlogs] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [globalFilter, setGlobalFilter] = useState("");
+
+
+  // pagination function make
+  const [itemPerPage, setItemPerPage] = useState(10)
+  const [currentPage, setCurrentPage] = useState(0)
+  const numberOfPages = Math.ceil(result / itemPerPage)
+  const [category , setCategory] = useState('')
+  const [search , setSearch] = useState('')
+
+  const pages = [...Array(numberOfPages).keys()];
+
 
   const table = useReactTable({
     data: blogs,
@@ -102,17 +111,16 @@ export default function FeatureBlog() {
 
   useEffect(() => {
     const handleData = async () => {
-      try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_LINK}/all-blogs`
-        );
-        setBlogs(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    handleData();
-  }, []);
+      const { data } = await axios.get(`${import.meta.env.VITE_LINK}/all-posts?category=${category}&search=${search}&page=${currentPage}&size=${itemPerPage}`)
+      setBlogs(data)
+    }
+    handleData()
+  }, [search, category, itemPerPage, currentPage])
+
+  const handlePage = (data) => {
+    setItemPerPage(data)
+    setCurrentPage(0)
+  }
 
   return (
     <div className="flex flex-col min-h-screen mx-auto py-5 px-4 sm:px-6 lg:px-8">
@@ -165,7 +173,7 @@ export default function FeatureBlog() {
                     key={cell.id}
                     className=""
                   >
-                    <Link  to={`/blog/${row.original._id}`}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Link>
+                    <Link to={`/blog/${row.original._id}`}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Link>
                   </Table.Cell>
                 ))}
               </Table.Row>
@@ -175,69 +183,17 @@ export default function FeatureBlog() {
       </div>
 
       <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm">
-        <div className="flex items-center mb-4 sm:mb-0">
-          <span className="mr-2">Items per page</span>
-          <Select
-            value={table.getState().pagination?.pageSize ?? 5}
-            onChange={(e) => {
-              table.setPageSize(Number(e.target.value));
-            }}
-          >
-            {[5, 10, 20, 30].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                {pageSize}
-              </option>
-            ))}
+
+        <div className="w-full gap-2 flex flex-wrap justify-center">
+          {pages.map(item => <button onClick={() => setCurrentPage(item)} className={currentPage == item ? ' bg-gradient-to-r from-pink-500 to-orange-500 text-white border-white border-2 font-bold w-10 h-10 rounded-full ' : 'bg-gradient-to-r from-pink-500 to-orange-500 text-white font-bold w-10 h-10 rounded-full'} key={item}>{item}</button>)}
+          <Select onChange={(e) => handlePage(parseInt(e.target.value))} id="countries" required>
+            <option selected disabled value='Web Development'>{itemPerPage}</option>
+            <option value='2'>2</option>
+            <option value='4'>4</option>
+            <option value='6'>6</option>
+            <option value='8'>8</option>
+
           </Select>
-        </div>
-
-        <div className="flex items-center space-x-2">
-          <button
-            className="p-2 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:opacity-50"
-            onClick={() => table.setPageIndex(0)}
-            disabled={!table.getCanPreviousPage()}
-          >
-            <ChevronsLeft size={20} />
-          </button>
-
-          <button
-            className="p-2 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:opacity-50"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            <ChevronLeft size={20} />
-          </button>
-
-          <span className="flex items-center">
-            <TextInput
-              min={1}
-              max={table.getPageCount()}
-              type="number"
-              value={table.getState().pagination?.pageIndex + 1 ?? 1}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                table.setPageIndex(page);
-              }}
-              className="w-16 p-2 rounded-md  text-center"
-            />
-            <span className="ml-1">of {table.getPageCount()}</span>
-          </span>
-
-          <button
-            className="p-2 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:opacity-50"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            <ChevronRight size={20} />
-          </button>
-
-          <button
-            className="p-2 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:opacity-50"
-            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-            disabled={!table.getCanNextPage()}
-          >
-            <ChevronsRight size={20} />
-          </button>
         </div>
       </div>
     </div>
