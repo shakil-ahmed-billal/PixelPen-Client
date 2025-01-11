@@ -36,7 +36,7 @@ const Home = () => {
           <p className="mb-10 md:text-4xl text-lg font-bold ">5 Easy Ways You Can Turn Future Into Success</p>
         </div>
         <div className="md:col-span-2">
-          <div className="border-2 border-[#3D4755] rounded-2xl p-5">
+          <div className="border-2 dark:border-[#3D4755] rounded-2xl p-5">
             <div className="flex gap-3 mb-5 justify-center">
               <button className="btn-custom">Recent</button>
               <button className="py-2 px-4 rounded-full border-2">Popular</button>
@@ -77,7 +77,7 @@ const Home = () => {
       <div className="md:grid md:grid-cols-8 gap-10 my-10">
         {/* category section */}
         <div className="col-span-2">
-          <div className="border border-[#3D4755] rounded-lg p-5">
+          <div className="border dark:border-[#3D4755] rounded-lg p-5">
             <p className="text-center text-xl font-semibold  mb-4">Explore Topic</p>
             <div className="border-color" />
             <div className="space-y-2 mt-3">
@@ -88,7 +88,7 @@ const Home = () => {
               <p className="flex items-center"><ArrowBigLeft></ArrowBigLeft> Finance and Business</p>
             </div>
           </div>
-          <div className="border border-[#3D4755] rounded-lg p-5 mt-4">
+          <div className="border dark:border-[#3D4755] rounded-lg p-5 mt-4">
             <p className="text-center text-xl font-semibold mb-3">Celebration</p>
             <div className="border-color mb-3"></div>
             <div className="relative">
@@ -100,7 +100,7 @@ const Home = () => {
               <p>Katen Doe</p><span className="text-red-500">.</span><p>17 August 2024</p>
             </div>
           </div>
-          <div className="border border-[#3D4755] p-3 rounded-xl my-4">
+          <div className="border dark:border-[#3D4755] p-3 rounded-xl my-4">
             <p className="text-xl font-bold">Tag Clouds</p>
             <div className="border-color my-4"></div>
             <div className="flex flex-wrap text-gray-400 gap-2">

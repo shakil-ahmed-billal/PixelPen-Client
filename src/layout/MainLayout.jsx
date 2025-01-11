@@ -19,7 +19,7 @@ const MainLayout = () => {
         height: 10,
         backgroundColor: "red",
         transformOrigin: "0%",
-        zIndex: 10,
+        zIndex: 100,
       }} className="">
 
       </motion.div>
