@@ -43,7 +43,7 @@ const Home = () => {
             </div>
             <div className="">
               <div className="">
-                {blogs.slice(0, 6).map(item => <motion.div
+                {blogs.slice(0, 4).map(item => <motion.div
 
                   key={item._id} className="mb-3">
                   <hr className="p-1 border-[#3D4755]" />
