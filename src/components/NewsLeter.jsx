@@ -1,7 +1,6 @@
 
-import React from "react";
+import {AiOutlineMail} from "react-icons/ai";
 import toast from "react-hot-toast";
-import { MdOutlineMail } from "react-icons/md";
 
 const NewsLetter = () => {
 
@@ -10,7 +9,7 @@ const NewsLetter = () => {
         e.preventDefault()
         const form = e.target;
         const email = form.email.value;
-      
+
         if (email) {
             toast.success(`Send ${email}Thank you for subscribing to our newsLater`)
         } else {
@@ -19,33 +18,35 @@ const NewsLetter = () => {
     }
 
     return (
-        <section
-            className="w-full rounded-xl py-[20px] sm:py-[40px] px-[40px] sm:px-[80px] bg-gradient-to-br from-[#161819] to-[#5C26B5] relative overflow-hidden">
-            <div className="w-full sm:w-[60%]">
-                <div className="w-full sm:w-[60%]">
-                    <h1 className="text-[2rem] sm:text-[2.8rem] text-[#71ECD2] font-[400] leading-[45px]">Subscibe
-                        to Our
-                        Newsletter</h1>
-                    <p className="text-[0.9rem] text-[#CBCBCB] mt-5">Get weekly update about our
-                        product
-                        on your email, no spam guaranteed we promise ✌️</p>
+        <section className="w-full rounded-xl py-[20px]">
+            <div className="flex lg:flex-row flex-col items-center justify-between gap-[20px]">
+                <div className="w-full sm:w-[80%] lg:w-[50%]">
+                    <img src="https://i.ibb.co/WkhTsW1/undraw-Mailbox-re-dvds.png" alt="image"
+                        className="w-full" />
                 </div>
 
-                <form onSubmit={handleForm} className="relative mt-12 mb-6">
-                    <input className="py-3 pr-4 pl-12 w-full outline-none z-100"
-                        name="email" placeholder="Email Address" />
+                <div className="w-full lg:w-[50%]">
+                    <b className="text-[1rem] sm:text-[1.8rem] text-text">Subscribe to our</b>
+                    <h1 className="text-[2rem] sm:text-[3rem] font-[800] capitalize text-text leading-[50px]">newsletter</h1>
+                    <p className="text-[1.1rem] mt-3">Get weekly updates on the newest design
+                        stories, case studies and tips right
+                        in your mailbox. <b>Subscribe now!</b></p>
 
-                    <MdOutlineMail
-                        className="p-1.5 bg-[#F8F8F8] text-[#6C777C] text-[2rem] absolute top-[50%] left-2 transform translate-y-[-50%]" />
+                    <form className="mt-5" onSubmit={handleForm}>
+                        <div className="relative">
+                            <input placeholder="Email Address"
+                                name="email"
+                                className="w-full py-3 pr-4 pl-14 outline-none focus:ring-0 border rounded-md border-[#00b0ff]" />
+                            <AiOutlineMail
+                                className="absolute top-[50%] transform translate-y-[-50%] left-3 text-[#00b0ff] text-[1.7rem]" />
+                        </div>
 
-                    <button
-                        className="absolute -bottom-[40px] md:bottom-[-20px] right-[-20px] bg-[#825FF1] hover:bg-[#7755e8] text-white py-3 px-8">subscribe
-                    </button>
-                </form>
+                        <button 
+                            className="w-full py-3 rounded-md bg-[#00b0ff] hover:bg-[#029de0] text-white mt-4">Submit
+                        </button>
+                    </form>
+                </div>
             </div>
-
-            <MdOutlineMail
-                className="text-[30rem] absolute top-[-100px] right-[-100px] text-white opacity-10 rotate-[-30deg]" />
         </section>
     );
 };
