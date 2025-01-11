@@ -1,22 +1,23 @@
 
 import {
-    Footer,
-    FooterBrand,
-    FooterCopyright,
-    FooterDivider,
-    FooterIcon,
-    FooterLink,
-    FooterLinkGroup,
-    FooterTitle,
-  } from "flowbite-react";
-  import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
-  import logo from '../assets/log.jpg'
+  Footer,
+  FooterBrand,
+  FooterCopyright,
+  FooterDivider,
+  FooterIcon,
+  FooterLink,
+  FooterLinkGroup,
+  FooterTitle,
+} from "flowbite-react";
+import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
+import logo from '../assets/log.jpg';
 
 
 
-  export function FooterSection() {
-    return (
-      <Footer container className="rounded-b-none">
+export function FooterSection() {
+  return (
+    <div className="">
+      <Footer container className="rounded-b-none md:px-24">
         <div className="w-full">
           <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
             <div>
@@ -64,6 +65,6 @@ import {
           </div>
         </div>
       </Footer>
-    );
-  }
-  
+    </div>
+  );
+}

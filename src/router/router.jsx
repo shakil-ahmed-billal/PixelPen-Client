@@ -12,6 +12,7 @@ import WatchList from "../pages/WatchList";
 import PrivateRoute from "../private/PrivateRoute";
 import Register from "../pages/Register";
 import Page404 from "../error/Page404";
+import About from "../pages/About";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <WatchList></WatchList>
                 </PrivateRoute>
+            },
+            {
+                path: '/about',
+                element: <About></About>
             },
             {
                 path: '*',

@@ -211,7 +211,7 @@ const Home = () => {
       </div>
       {/* extra section number 2 */}
       {/* promotion section */}
-      <p className=" text-center text-2xl font-semibold  mb-10">Promotion Section</p>
+      <p id="promotion"  className=" text-center text-2xl font-semibold  mb-10">Promotion Section</p>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-[15px] w-full  min-h-[400px] mb-10">
 
         <div

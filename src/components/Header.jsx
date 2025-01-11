@@ -24,7 +24,11 @@ export function Header() {
 
     const { user, LogOutUser } = useContext(AuthContext)
 
-
+    const scrollToSection = (event) => {
+        event.preventDefault();
+        const targetId = event.currentTarget.getAttribute('href').substring(1); const targetElement = document.getElementById(targetId);
+        window.scrollTo({ top: targetElement.offsetTop, behavior: 'smooth' });
+    };
 
     const handleLogOut = () => {
         LogOutUser()
@@ -60,12 +64,12 @@ export function Header() {
                 </div>
                 <NavbarCollapse>
                     <NavbarLink><NavLink to={'/'}>Home</NavLink></NavbarLink>
-                    <NavbarLink><NavLink to={'/add-blog'}>Add Blog</NavLink></NavbarLink>
+                    {user&&<NavbarLink><NavLink to={'/add-blog'}>Add Blog</NavLink></NavbarLink>}
                     <NavbarLink><NavLink to={'/all-blogs'}>All Blogs</NavLink></NavbarLink>
-                    <NavbarLink><NavLink to={'/watch-list'}>WishList</NavLink></NavbarLink>
+                    {user &&<NavbarLink><NavLink to={'/watch-list'}>WishList</NavLink></NavbarLink>}
                     <NavbarLink><NavLink to={'/feature-blog'}>Feature Blog</NavLink></NavbarLink>
-
-                    {/* <NavbarLink href="#"></NavbarLink> */}
+                    <NavbarLink><a href="#promotion" onClick={scrollToSection}>Promotion</a></NavbarLink>
+                    <NavbarLink ><NavLink to={'/about'}>About</NavLink></NavbarLink>
                 </NavbarCollapse>
             </Navbar>
         </div>

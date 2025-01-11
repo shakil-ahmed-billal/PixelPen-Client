@@ -20,7 +20,7 @@ const NewsLetter = () => {
     return (
         <section className="w-full rounded-xl py-[20px]">
             <div className="flex lg:flex-row flex-col items-center justify-between gap-[20px]">
-                <div className="w-full sm:w-[80%] lg:w-[50%]">
+                <div className="w-full sm:w-[80%] lg:w-[50%] ">
                     <img src="https://i.ibb.co/WkhTsW1/undraw-Mailbox-re-dvds.png" alt="image"
                         className="w-full" />
                 </div>

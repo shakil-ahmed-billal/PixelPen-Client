@@ -95,7 +95,7 @@ const BlogCard = ({ blog }) => {
                     </div>
                     <p className='flex items-center gap-1'><MessageCircle />{comment}</p>
                 </div>
-                <p className="p-3 md:text-2xl font-semibold">{title}</p>
+                <p className="p-3 md:text-2xl font-semibold">{title.slice(0, 50)} ...</p>
                 <p className="text-[#818E9F] p-3">{shortDescription.slice(0, 80)}... <Link to={`blog/${_id}`}>see more</Link></p>
                 <div className="">
                     <Link to={`/blog/${_id}`}>

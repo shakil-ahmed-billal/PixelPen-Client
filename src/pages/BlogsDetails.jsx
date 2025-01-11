@@ -112,11 +112,11 @@ const BlogsDetails = () => {
     return (
         <div className='md:grid grid-cols-6 gap-3'>
             <div className="col-span-4">
-                <div className="my-5">
+                <div className="my-5 relative">
                     <p className='text-[#8F9BAD] py-3'>PixelPen / {category} / {title?.slice(0, 50)}</p>
                     <p className='md:text-4xl font-bold dark:text-white'>{title || <Skeleton></Skeleton>}</p>
-                    <div className="flex flex-wrap justify-between items-center text-xs">
-                        <div className="flex gap-3 md:my-3 items-center py-3">
+                    <div className="flex flex-wrap justify-between items-center ">
+                        <div className="flex gap-3 md:my-3 items-center py-3 md:text-md text-sm">
                             <PhotoProvider>
                                 <PhotoView src={userPhoto}>
                                     <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
@@ -126,7 +126,7 @@ const BlogsDetails = () => {
                             <span className='text-[#FE4F70]'>.</span><p>Date: 12/12/12</p> <span className='text-[#FE4F70]'>.</span>
                             <p className='flex items-center gap-2'><MessageCircle />{comment}</p>
                         </div>
-                        <div className="mr-5">
+                        <div className="mr-5 md:flex md:relative absolute right-0  md:bottom-0 -bottom-12">
                             <button onClick={handleWatchList} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 md:p-3 mr-2'><Eye /></button>
                             <Link to={`/update-blog/${_id}`}><button disabled={user?.email !== userEmail} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 md:p-3'><Edit></Edit></button></Link>
                         </div>
