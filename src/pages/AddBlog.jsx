@@ -1,18 +1,17 @@
-import { useState } from "react"
-import axios from 'axios'
-import useAuth from "../hooks/useAuth"
 import { Select, Textarea, TextInput } from 'flowbite-react';
-import logo from '../assets/log.jpg'
+import { useState } from "react";
 import toast from "react-hot-toast";
+import logo from '../assets/log.jpg';
+import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddBlog = () => {
 
     const [blogImage, setImage] = useState('')
-    const {user} = useAuth()
+    const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
 
-   
+
 
     const handleForm = async (e) => {
         e.preventDefault()
@@ -27,14 +26,14 @@ const AddBlog = () => {
         const userEmail = user.email;
         const userPhoto = user.photoURL;
 
-        const blog = { title, imageURL, shortDescription, longDescription, category  , postTime , userName , userEmail ,userPhoto , comment:0}
-        
+        const blog = { title, imageURL, shortDescription, longDescription, category, postTime, userName, userEmail, userPhoto, comment: 0 }
 
-        const {data} = await axiosSecure.post(`/add-blog` , blog)
-     
-        if(data){
+
+        const { data } = await axiosSecure.post(`/add-blog`, blog)
+
+        if (data) {
             toast.success('blog post successfully')
-        }else{
+        } else {
             toast.error('blog cannot post')
         }
 
@@ -44,7 +43,7 @@ const AddBlog = () => {
         <div>
             <div className='md:grid grid-cols-2 justify-center items-center mt-10'>
                 <div className="h-[520px] object-cover">
-                    <img className="h-full w-full object-cover" src={blogImage ? blogImage : logo } alt="" />
+                    <img className="h-full w-full object-cover" src={blogImage ? blogImage : logo} alt="" />
                 </div>
                 <section className=' p-2 md:p-6 mx-auto border dark:border-[#3D4755] rounded-md shadow-md '>
                     <h2 className='text-xl font-bold capitalize '>

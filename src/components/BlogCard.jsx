@@ -43,7 +43,7 @@ const BlogCard = ({ blog }) => {
     const handleComment = async () => {
 
         const commentText = stateComment
-  
+
 
 
         if (!user) {
@@ -69,12 +69,12 @@ const BlogCard = ({ blog }) => {
             commentLike: 0,
             commentDate: new Date()
         }
-        
+
 
 
         if (user.email !== userEmail) {
             const { data } = await axios.post(`${import.meta.env.VITE_LINK}/add-comment`, postComment)
-        
+
             if (data) {
                 toast.success(`Comment: ${commentText}`)
             }

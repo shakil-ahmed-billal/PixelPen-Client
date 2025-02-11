@@ -136,7 +136,7 @@ const Home = () => {
           <p className="md:text-6xl  font-bold ">The trick to getting more done is to have the freedom to roam around</p>
           <p className="my-5">Explore the advancements in renewable energy technologies and how they are transforming the global energy landscape. Learn about the benefits, challenges, and future prospects of harnessing sustainable power sources.</p>
           <div className="">
-            <div className="flex gap-3 md:my-3 items-center py-3">
+            <div className="flex gap-1 md:gap-3 md:my-3 items-center py-3">
               <PhotoProvider>
                 <PhotoView src=''>
                   <img src='https://i.ibb.co.com/VMY2Qq7/Leonardo-Kino-XL-Generate-a-clean-cartoonstyle-illustration-of-0-2.jpg' className='w-10 h-10 object-cover rounded-full' alt="" />
@@ -180,7 +180,7 @@ const Home = () => {
               >
                 <hr className="p-1 dark:border-[#3D4755]" />
                 <Link to={`/blog/${item._id}`}>
-                  <div className="grid grid-cols-4 items-center gap-2">
+                  <div className="grid grid-cols-4 items-center  gap-2">
                     <motion.img
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}

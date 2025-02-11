@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+
 import axios from 'axios'
 import { Select, TextInput } from 'flowbite-react'
 import { Search } from 'lucide-react'
@@ -16,8 +16,8 @@ const AllBlogs = () => {
     const { loading } = useAuth()
 
     // pagination function make
-    const [itemPerPage , setItemPerPage] = useState(6)
-    const [currentPage , setCurrentPage] = useState(0)
+    const [itemPerPage, setItemPerPage] = useState(6)
+    const [currentPage, setCurrentPage] = useState(0)
     const numberOfPages = Math.ceil(result / itemPerPage)
 
     const pages = [...Array(numberOfPages).keys()];
@@ -25,7 +25,7 @@ const AllBlogs = () => {
     //     pages.push(i + 1)
 
     // }
- 
+
 
 
     useEffect(() => {
@@ -34,9 +34,9 @@ const AllBlogs = () => {
             setBlogs(data)
         }
         handleData()
-    }, [search, category , itemPerPage , currentPage])
+    }, [search, category, itemPerPage, currentPage])
 
-    const handlePage = (data) =>{
+    const handlePage = (data) => {
         setItemPerPage(data)
         setCurrentPage(0)
     }
@@ -66,15 +66,15 @@ const AllBlogs = () => {
                 </div>
             </div>}
             <div className="w-full gap-2 flex flex-wrap justify-center">
-                {pages.map(item => <button onClick={()=>setCurrentPage(item)} className={currentPage == item? ' bg-gradient-to-r from-pink-500 to-orange-500 text-white border-white border-2 font-bold w-10 h-10 rounded-full ' : 'bg-gradient-to-r from-pink-500 to-orange-500 text-white font-bold w-10 h-10 rounded-full'} key={item}>{item}</button>)}
+                {pages.map(item => <button onClick={() => setCurrentPage(item)} className={currentPage == item ? ' bg-gradient-to-r from-pink-500 to-orange-500 text-white border-white border-2 font-bold w-10 h-10 rounded-full ' : 'bg-gradient-to-r from-pink-500 to-orange-500 text-white font-bold w-10 h-10 rounded-full'} key={item}>{item}</button>)}
                 <Select onChange={(e) => handlePage(parseInt(e.target.value))} id="countries" required>
-                        <option selected disabled value='Web Development'>{itemPerPage}</option>
-                        <option value='2'>2</option>
-                        <option value='4'>4</option>
-                        <option value='6'>6</option>
-                        <option value='8'>8</option>
-                        
-                    </Select>
+                    <option selected disabled value='Web Development'>{itemPerPage}</option>
+                    <option value='2'>2</option>
+                    <option value='4'>4</option>
+                    <option value='6'>6</option>
+                    <option value='8'>8</option>
+
+                </Select>
             </div>
         </div>
     )

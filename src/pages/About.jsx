@@ -2,13 +2,13 @@
 const About = () => {
     return (
         <div>
-            <article className=" px-6 py-24 mx-auto space-y-12  ">
+            <article className=" md:px-6 md:py-24 mx-auto space-y-12  ">
                 <div className="w-full mx-auto space-y-4 text-center">
                     <p className="text-xs font-semibold tracking-wider uppercase">#TailwindCSS</p>
-                    <h1 className="text-4xl font-bold leading-tight md:text-5xl">Frontend Development: Expertise in React.js for building dynamic user interfaces with reusable components and efficient state management.</h1>
+                    <h1 className="text-xl font-bold leading-tight md:text-5xl">Frontend Development: Expertise in React.js for building dynamic user interfaces with reusable components and efficient state management.</h1>
                     <p className="text-sm ">by
                         <a rel="noopener noreferrer" href="#" target="_blank" className="underline dark:text-default-600">
-                            <span itemProp="name">Shakil Ahmed</span>
+                            <span itemProp="name"> Shakil Ahmed </span>
                         </a>on
                         <time dateTime="2021-02-12 15:34:18-0200">Jan 11 2025</time>
                     </p>
