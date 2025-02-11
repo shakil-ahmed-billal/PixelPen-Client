@@ -1,31 +1,31 @@
-import { useEffect, useState } from "react"
 import axios from 'axios'
-import useAuth from "../hooks/useAuth"
-import { useParams } from "react-router-dom"
 import { Select, Textarea, TextInput } from "flowbite-react"
+import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import { useParams } from "react-router-dom"
+import useAuth from "../hooks/useAuth"
 import useAxiosSecure from "../hooks/useAxiosSecure"
 const UpdateBlog = () => {
 
-    const {user} = useAuth()
-    const {id} = useParams()
-    const [details , setDetails] = useState([])
+    const { user } = useAuth()
+    const { id } = useParams()
+    const [details, setDetails] = useState([])
     const axiosSecure = useAxiosSecure()
-    
-    
-    const {title, imageURL, shortDescription , longDescription, category, postTime, userName, userEmail, userPhoto, _id } = details[0] || {}
+
+
+    const { title, imageURL, shortDescription, longDescription, category, postTime, userName, userEmail, userPhoto, _id } = details[0] || {}
 
     const [blogImage, setImage] = useState('')
 
-    useEffect(()=>{
-        const blogsData = async()=>{
-            const {data} = await axios.get(`${import.meta.env.VITE_LINK}/blog/${id}`)
+    useEffect(() => {
+        const blogsData = async () => {
+            const { data } = await axios.get(`${import.meta.env.VITE_LINK}/blog/${id}`)
             setDetails(data)
             console.log(data)
         }
         blogsData()
         setImage(imageURL)
-    }, [id , setDetails , imageURL])
+    }, [id, setDetails, imageURL])
 
 
     const handleForm = async (e) => {
@@ -41,14 +41,14 @@ const UpdateBlog = () => {
         const userEmail = user.email;
         const userPhoto = user.photoURL;
 
-        const blog = { title, imageURL, shortDescription, longDescription, category  , postTime , userName , userEmail ,userPhoto , comment:0}
-        
+        const blog = { title, imageURL, shortDescription, longDescription, category, postTime, userName, userEmail, userPhoto, comment: 0 }
 
-        const {data} = await axiosSecure.put(`/update-blog/${_id}` , blog)
-        
-        if(data){
+
+        const { data } = await axiosSecure.put(`/update-blog/${_id}`, blog)
+
+        if (data) {
             toast.success('blog information update')
-        }else{
+        } else {
             toast.error('cannot update this information')
         }
     }
@@ -59,7 +59,7 @@ const UpdateBlog = () => {
                 <div className="h-[520px] object-cover">
                     <img className="h-full w-full object-cover" src={blogImage && blogImage} alt="" />
                 </div>
-                <section className=' p-2 md:p-6 mx-auto border border-[#3D4755] rounded-md shadow-md '>
+                <section className=' p-2 md:p-6 mx-auto border dark:border-[#3D4755] rounded-md shadow-md '>
                     <h2 className='text-lg font-semibold capitalize '>
                         Update a Job
                     </h2>

@@ -127,8 +127,8 @@ const BlogsDetails = () => {
                             <p className='flex items-center gap-2'><MessageCircle />{comment}</p>
                         </div>
                         <div className="mr-5 md:flex md:relative absolute right-0  md:bottom-0 -bottom-12">
-                            <button onClick={handleWatchList} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 md:p-3 mr-2'><Eye /></button>
-                            <Link to={`/update-blog/${_id}`}><button disabled={user?.email !== userEmail} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 md:p-3'><Edit></Edit></button></Link>
+                            <button onClick={handleWatchList} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 md:p-3 mr-2 text-white'><Eye /></button>
+                            <Link to={`/update-blog/${_id}`}><button disabled={user?.email !== userEmail} className=' bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 md:p-3 text-white'><Edit></Edit></button></Link>
                         </div>
                     </div>
                     <div className="">
@@ -160,7 +160,7 @@ const BlogsDetails = () => {
                     {commentData && commentData.map(item => <div key={item._id} className=''>
                         <div className="flex gap-2 w-full mb-2">
                             {/* <hr className="p-1 border-[#3D4755]" /> */}
-                            <div className="flex gap-2 border-2 border-[#3D4755] w-full  rounded-2xl p-2">
+                            <div className="flex gap-2 border-2 dark:border-[#3D4755] w-full  rounded-2xl p-2">
                                 <div className="">
                                     <img className="rounded-full w-16 object-cover" src={item.authorPhoto} alt="" />
                                 </div>

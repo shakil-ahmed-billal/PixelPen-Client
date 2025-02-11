@@ -101,7 +101,7 @@ const BlogCard = ({ blog }) => {
                     <Link to={`/blog/${_id}`}>
                         <div className="relative">
                             <img src={imageURL} alt="" className="object-cover object-center w-full h-72 dark:bg-gray-500" />
-                            <div className="absolute right-5 bottom-5 z-10"><button className="bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2"><ListCheckIcon /></button></div>
+                            <div className="absolute right-5 bottom-5 z-10"><button className="bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 text-white"><ListCheckIcon /></button></div>
                         </div>
                     </Link>
                 </div>
@@ -119,7 +119,7 @@ const BlogCard = ({ blog }) => {
                                 </svg>
                             </button>
                         </div>
-                        <button onClick={handleWatchList} type="button" title="Bookmark post" className="flex items-center justify-center bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 mr-1">
+                        <button onClick={handleWatchList} type="button" title="Bookmark post" className="flex items-center justify-center bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-2 mr-1 text-white">
                             <Eye />
                         </button>
                     </div>
@@ -142,7 +142,7 @@ const BlogCard = ({ blog }) => {
                         </p>
                         <div className="w-full flex gap-3">
                             <TextInput onChange={(e) => setComment(e.target.value)} type="text" placeholder="Add a comment..." className="w-full py-0.5" spellCheck="false" data-ms-editor="true" />
-                            <button onClick={handleComment} className="flex bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-3 items-center justify-center"><Send></Send></button>
+                            <button onClick={handleComment} className="flex bg-gradient-to-r from-red-500 to-yellow-500 rounded-full p-3 items-center justify-center text-white"><Send></Send></button>
                         </div>
                     </div>
                 </div>

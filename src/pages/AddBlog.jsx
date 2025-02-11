@@ -46,7 +46,7 @@ const AddBlog = () => {
                 <div className="h-[520px] object-cover">
                     <img className="h-full w-full object-cover" src={blogImage ? blogImage : logo } alt="" />
                 </div>
-                <section className=' p-2 md:p-6 mx-auto border border-[#3D4755] rounded-md shadow-md '>
+                <section className=' p-2 md:p-6 mx-auto border dark:border-[#3D4755] rounded-md shadow-md '>
                     <h2 className='text-xl font-bold capitalize '>
                         Post a Blog
                     </h2>
