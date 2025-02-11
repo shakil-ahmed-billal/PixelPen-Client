@@ -170,31 +170,39 @@ const Home = () => {
           </div>
           <div className="mt-20">
             <p className="font-bold text-xl my-5">Explore Blogs Choice</p>
-            {blogs.slice(0, 6).map(item => <motion.div
-
-              key={item._id} className="mb-3">
-              <hr className="p-1 border-[#3D4755]" />
-              <Link to={`/blog/${item._id}`}>
-                <div className="grid grid-cols-4 items-center gap-2">
-                  <div className="">
+            {blogs.slice(0, 6).map((item, index) => (
+              <motion.div
+                key={item._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.3 }}
+                className="mb-3"
+              >
+                <hr className="p-1 border-[#3D4755]" />
+                <Link to={`/blog/${item._id}`}>
+                  <div className="grid grid-cols-4 items-center gap-2">
                     <motion.img
                       initial={{ scale: 0 }}
-                      animate={{
-                        scale: 1,
-                      }}
-                      transition={{ delay: 0.1 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.2 }}
                       referrerPolicy="no-referrer"
                       className="h-20 w-28 object-cover"
-                      src={item.imageURL} alt="" />
+                      src={item.imageURL}
+                      alt=""
+                    />
+                    <div className="col-span-3">
+                      <p className="font-bold">Post By: {item.userName}</p>
+                      <p className="dark:text-white font-semibold text-sm">
+                        Title: {item.title.slice(0, 50)}
+                      </p>
+                      <p className="text-[#8F9AA5] text-xs">
+                        Date: {format(new Date(item.postTime), "P")}
+                      </p>
+                    </div>
                   </div>
-                  <div className="col-span-3">
-                    <p className="font-bold">Post By: {item.userName}</p>
-                    <p className="dark:text-white  font-semibold text-sm">Title: {item.title.slice(0, 50)}</p>
-                    <p className="text-[#8F9AA5] text-xs">Date: {format(new Date(item.postTime), 'P')}</p>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>)}
+                </Link>
+              </motion.div>
+            ))}
           </div>
           <div className="">
             <p className="text-center text-6xl text-red-600">....</p>
@@ -211,7 +219,7 @@ const Home = () => {
       </div>
       {/* extra section number 2 */}
       {/* promotion section */}
-      <p id="promotion"  className=" text-center text-2xl font-semibold  mb-10">Promotion Section</p>
+      <p id="promotion" className=" text-center text-2xl font-semibold  mb-10">Promotion Section</p>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-[15px] w-full  min-h-[400px] mb-10">
 
         <div
