@@ -61,7 +61,7 @@ const AllBlogs = () => {
                 <Link to={`/add-blog`} ><button className='btn-custom md:mt-0 mt-4'>Blog Post</button></Link>
             </div>
             {loading ? <p>Loading</p> : <div className="">
-                <div className="md:grid max-xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 gap-10 my-10">
+                <div className="md:grid 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 gap-10 my-10">
                     {blogs && blogs?.map(blog => <BlogCard key={blog._id} blog={blog}></BlogCard>)}
                 </div>
             </div>}
