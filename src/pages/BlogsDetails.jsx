@@ -21,7 +21,7 @@ const BlogsDetails = () => {
     const { user } = useAuth()
 
 
-    const { title, imageURL, shortDescription, longDescription, category, postTime, userName, userEmail, userPhoto, _id, comment } = details[0] || {}
+    const { title, imageURL, shortDescription, longDescription, category,  userName, userEmail, userPhoto, _id, comment } = details[0] || {}
 
 
     useEffect(() => {
@@ -116,7 +116,7 @@ const BlogsDetails = () => {
                     <p className='text-[#8F9BAD] py-3'>PixelPen / {category} / {title?.slice(0, 50)}</p>
                     <p className='md:text-4xl font-bold dark:text-white'>{title || <Skeleton></Skeleton>}</p>
                     <div className="flex flex-wrap justify-between items-center ">
-                        <div className="flex gap-3 md:my-3 items-center py-3 md:text-md text-sm">
+                        <div className="flex md:gap-3 gap-1 md:my-3 items-center py-3 ">
                             <PhotoProvider>
                                 <PhotoView src={userPhoto}>
                                     <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />

@@ -9,7 +9,7 @@ import {
   FooterLinkGroup,
   FooterTitle,
 } from "flowbite-react";
-import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
+import { BsCodeSlash, BsDribbble, BsFacebook, BsGithub, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 import logo from '../assets/log.jpg';
 
 
@@ -56,11 +56,11 @@ export function FooterSection() {
           <div className="w-full sm:flex sm:items-center sm:justify-between">
             <FooterCopyright href="#" by="PixelPen™" year={2022} />
             <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-              <FooterIcon href="#" icon={BsFacebook} />
-              <FooterIcon href="#" icon={BsInstagram} />
-              <FooterIcon href="#" icon={BsTwitter} />
-              <FooterIcon href="#" icon={BsGithub} />
-              <FooterIcon href="#" icon={BsDribbble} />
+              <FooterIcon href="https://www.facebook.com/shakil.ahmed.billal" icon={BsFacebook} />
+              <FooterIcon href="https://codepen.io/shakil-ahmed-billal" icon={BsCodeSlash} />
+              <FooterIcon href="https://bd.linkedin.com/in/shakil-ahmed-billal" icon={BsLinkedin} />
+              <FooterIcon href="https://github.com/shakil-ahmed-billal" icon={BsGithub} />
+              <FooterIcon href="https://xhakil.vercel.app" icon={BsDribbble} />
             </div>
           </div>
         </div>

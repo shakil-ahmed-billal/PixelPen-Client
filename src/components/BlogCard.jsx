@@ -86,7 +86,7 @@ const BlogCard = ({ blog }) => {
 
     return (
         <div>
-            <div className="rounded-md shadow-md border dark:border-[#818E9F] ">
+            <div className="rounded-md h-full shadow-md border dark:border-[#818E9F] ">
                 <div className="flex gap-3 items-center p-3 ">
                     <img src={userPhoto} className='w-10 h-10 object-cover rounded-full' alt="" />
                     <div className="flex flex-wrap items-center text-sm gap-1">
