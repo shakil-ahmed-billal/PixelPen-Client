@@ -39,7 +39,7 @@ const RecentBlog = ({ blog }) => {
     }
 
     return (
-        <div className='border-b border-gray-700 mb-2'>
+        <div className='border-b dark:border-gray-700 mb-2'>
             <div className="flex md:flex-row flex-col gap-4 md:p-3">
                 <div className="">
                     <Link to={`/blog/${_id}`}>

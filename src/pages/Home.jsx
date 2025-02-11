@@ -46,7 +46,7 @@ const Home = () => {
                 {blogs.slice(0, 4).map(item => <motion.div
 
                   key={item._id} className="mb-3">
-                  <hr className="p-1 border-[#3D4755]" />
+                  <hr className="p-1 dark:border-[#3D4755]" />
                   <Link to={`/blog/${item._id}`}>
                     <div className="grid grid-cols-4 items-center gap-2">
                       <div className="">
@@ -120,7 +120,7 @@ const Home = () => {
         </div>
         {/* category section */}
         {/* resend blog section */}
-        <div className="col-span-6 border-[#3F4955] border rounded-xl p-5">
+        <div className="col-span-6 dark:border-[#3F4955]  border rounded-xl p-5">
           {blogs && blogs.slice(0, 6).map(blog => <RecentBlog key={blog._id} blog={blog}></RecentBlog>)}
         </div>
         {/* resend blog section */}
@@ -178,7 +178,7 @@ const Home = () => {
                 transition={{ delay: index * 0.1, duration: 0.3 }}
                 className="mb-3"
               >
-                <hr className="p-1 border-[#3D4755]" />
+                <hr className="p-1 dark:border-[#3D4755]" />
                 <Link to={`/blog/${item._id}`}>
                   <div className="grid grid-cols-4 items-center gap-2">
                     <motion.img

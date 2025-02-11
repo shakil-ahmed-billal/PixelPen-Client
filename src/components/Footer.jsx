@@ -9,7 +9,7 @@ import {
   FooterLinkGroup,
   FooterTitle,
 } from "flowbite-react";
-import { BsCodeSlash, BsDribbble, BsFacebook, BsGithub, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
+import { BsCodeSlash, BsDribbble, BsFacebook, BsGithub, BsLinkedin } from "react-icons/bs";
 import logo from '../assets/log.jpg';
 
 
