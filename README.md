@@ -24,36 +24,43 @@ Check out the project requirements in the [Requirements Document](./assignment_c
 ## 📚 Core Technologies and Tools  
 
 ### 🔧 Client-Side:  
-- **React.js**: Built with React for a fast, responsive user interface.  
-- **UI Library**: Flowbite-React for beautiful, pre-designed components.  
-- **React Router**: Enables dynamic and efficient routing.  
-- **Custom Hooks**: For reusable and modular state management.  
-- **Tailwind CSS**: Styled using Tailwind for clean and responsive layouts.  
-- **Axios**: For streamlined API calls and data fetching.  
-- **Framer Motion**: Smooth animations and user interactions.  
+- **React.js (18.3.1)**: Fast and dynamic UI library.  
+- **React Router (7.1.0)**: Enables smooth navigation.  
+- **Tailwind CSS (3.4.17)**: Modern and efficient styling.  
+- **DaisyUI (4.12.22)**: Pre-designed UI components for Tailwind.  
+- **Flowbite-React (0.10.2)**: Enhanced UI elements.  
+- **Lucide & Lucide-React (0.469.0)**: Icon library for a modern interface.  
+- **Framer Motion (11.15.0)**: For smooth animations.  
+- **Axios (1.7.9)**: Simplified HTTP requests.  
+- **React Hot Toast (2.4.1)**: Notifications and alerts.  
+- **React Loading Skeleton (3.5.0)**: Placeholder loading states.  
+- **React Photo View (1.2.6)**: Image preview and gallery support.  
+- **Ka-Table (11.3.0)**: Advanced table management.  
 
 ### 🔧 Server-Side:  
-- **Node.js**: Server-side runtime for high performance.  
-- **Express.js**: Lightweight and flexible web framework for building APIs.  
-- **MongoDB**: Database solution for storing user data, blogs, and comments.  
+- **Node.js**: JavaScript runtime for the backend.  
+- **Express.js**: Lightweight framework for handling APIs.  
+- **MongoDB**: NoSQL database for storing blogs, users, and comments.  
 
 ### 🔧 Other Key Integrations:  
-- **Firebase Authentication**: Secure login and signup using email/password and Google accounts.  
-- **Firebase Firestore**: Real-time database to sync data across users.  
+- **Firebase Authentication (11.1.0)**: Secure user authentication.  
+- **Firebase Firestore**: Real-time database for syncing content.  
+- **ESLint (9.17.0)**: Code linting for consistency.  
+- **Vite (6.0.3)**: Fast and modern development build tool.  
 
 ---
 
 ## 🚀 Features  
 
-1. **🚫 Private Routes**: Only accessible to authenticated users.  
-2. **☄️ User Authentication**: Firebase Authentication with email/password and Google support.  
-3. **📝 Blog Management**: Create, edit, and delete blogs; engage with comments and likes.  
-4. **🌿 Real-Time Updates**: Powered by Firebase Firestore.  
-5. **📱 Responsive Design**: Ensures an optimal experience on both desktop and mobile devices.  
+1. **🚫 Private Routes**: Authenticated user access control.  
+2. **☄️ Firebase Authentication**: Google & email/password login.  
+3. **📝 Blog Management**: Create, edit, delete, and interact with blogs.  
+4. **🌿 Real-Time Updates**: Instant data synchronization via Firestore.  
+5. **📱 Responsive Design**: Optimized for both desktop & mobile devices.  
 6. **📍 Dynamic Routing**: Efficient navigation with React Router.  
-7. **🔙 Backend Integration**: Node.js and Express.js handle API requests and connect to MongoDB.  
-8. **👁️ User Dashboard**: Manage blogs, comments, and profile settings with an intuitive dashboard.  
-9. **♨️ Blog Sorting and Filtering**: Advanced tools to sort and filter blogs by categories, tags, or popularity.  
+7. **🔙 Backend Integration**: Node.js and Express.js handle API requests.  
+8. **👁️ User Dashboard**: Manage blogs, comments, and settings easily.  
+9. **♨️ Blog Sorting & Filtering**: Advanced content organization tools.  
 
 ---
 
@@ -61,14 +68,13 @@ Check out the project requirements in the [Requirements Document](./assignment_c
 Follow these steps to set up the project locally:
 
 ### Prerequisites  
-- Node.js  
-- npm  
-- Firebase account  
-- MongoDB database  
+- Node.js installed  
+- npm installed  
+- Firebase account setup  
+- MongoDB database configured  
 
 ### Steps  
-1. Clone the repository:
----
-
-## 📄 License  
-This project is licensed under the [MIT License](./LICENSE).  
+1. **Clone the repository**  
+   ```sh
+   git clone https://github.com/shakil-ahmed-billal/pixelpen.git
+   cd pixelpen
